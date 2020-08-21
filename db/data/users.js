@@ -4,8 +4,8 @@ module.exports = [
     email: "joe@email",
     password: "pass",
     passwordConfirmation: "pass",
-    userWishListed: ["vienna"],
-    userFavorited: ["vienna"],
-    userReview: []
+    // userWishListed: ["vienna"],
+    // userFavorited: ["vienna"],
+    // userReview: []
   }
 ]

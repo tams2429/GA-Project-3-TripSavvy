@@ -1,11 +1,9 @@
 const User = require('../models/user')
-
 const jwt = require('jsonwebtoken')
 const { unauthorized } = require('../lib/errorMessage')
 const { secret } = require('../config/environment')
 
 //REGISTRATION
-
 async function register(req, res) {
   try {
     const user = await User.create(req.body)
@@ -16,7 +14,6 @@ async function register(req, res) {
 }
 
 //LOGIN
-
 async function login(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email }) 
@@ -36,7 +33,6 @@ async function login(req, res) {
     res.json(err)
   }
 }
-
 
 module.exports = {
   register, 

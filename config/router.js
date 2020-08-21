@@ -1,17 +1,18 @@
 const router = require('express').Router()
 const cities = require('../controllers/cities')
 const auth = require('../controllers/auth')
+const secureRoute = require('../lib/secureRoute')
 
 //routes:
 
 router.route('/cities')
   .get(cities.index)
-  .post(cities.create)
+  .post(secureRoute, cities.create)
 
 router.route('/cities/:id')
   .get(cities.show)
-  .delete(cities.delete)
-  .put(cities.edit)
+  .delete(secureRoute, cities.delete)
+  .put(secureRoute, cities.edit)
 
 router.route('/register')
   .post(auth.register)

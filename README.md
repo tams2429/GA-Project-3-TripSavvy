@@ -8,11 +8,15 @@ This is a test feature
 
 - **Deadline** Friday 28th Aug. (1.5 weeks),
 - **Full-stack** application,
-- **Front-End** = **React JS**,
+MAKE A PROBLEM 
+- **FrontBBREAK IT S**,
 - **Back-End** = **Node JS** with **Express** **(Server API)** and **Mongo DB** **(Database)**,
     - **CRUD** (Create Read Update Delete) functionality,
-    - **Multiple Models/Collections** in Database,
+HEY LETS RUIN THIS READ ME 
+
 - Have a **git repositry** hosted on **Github**,
+PROBELMS EVERY WHERE 
+
 - Be **deployed online** for **public accessibility**,
 
 # Idea (Inspire trip, Grad trip, Take a Trip, TripSavvy)
@@ -24,7 +28,7 @@ This is a test feature
 
 # MVP (By Weds 26th Aug?)
 
-- A homepage with some basic filters in the style of images (functions as a checkbox) that will search the Database with a few initial city records (i.e. 4/5) and present back a 'Show' Card containing information about the city,
+- A homepage with some basic filters in the style of images (functions as a checkbox) that will search the Database with a few initial city records (i.e. 4/5) and present back a 'Show    ' Card containing information about the city,
     - Within the 'Show' page, there will be added functionality for registered and logged in users, where they can add a city to their 'favorites' and/or 'wishlists'
 
     Home Page wireframe:

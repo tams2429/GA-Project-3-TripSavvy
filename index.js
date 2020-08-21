@@ -19,9 +19,6 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useC
 
 
 
-
-
 app.use(express.json())
 app.use(logger)
-
 app.listen(port, () => console.log(`Lisening on Port: ${port}`))

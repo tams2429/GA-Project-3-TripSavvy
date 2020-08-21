@@ -8,12 +8,11 @@ module.exports = [
     isOutdoors: true,
     showCardInfo: {
       img: "",
-      latLong: "",
       description: "",
-      //* To include within cities schema and populated through seeds
-      userWishListed: {type: mongoose.Schema.ObjectId, ref: 'User'},
-      userFavorited: {type: mongoose.Schema.ObjectId, ref: 'User'},
-      userReviews: {type: mongoose.Schema.ObjectId, ref: 'User'}
+      // //* To include within cities schema and populated through seeds
+      // userWishListed: {type: mongoose.Schema.ObjectId, ref: 'User'},
+      // userFavorited: {type: mongoose.Schema.ObjectId, ref: 'User'},
+      // userReviews: {type: mongoose.Schema.ObjectId, ref: 'User'}
     }
   }
 ]

@@ -51,7 +51,6 @@ async function citiesEdit(req, res) {
   }
 }
 
-
 module.exports = {
   index: citiesIndex,
   show: citiesShow,

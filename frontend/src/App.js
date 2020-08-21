@@ -1,8 +1,11 @@
 import React from 'react'
 
+import HomePage from './HomePage'
+import NavBar from './common/NavBar'
+
 const App = () => {
   return (
-    <h1>Hello World</h1>
+    <HomePage />
   )
 }
 

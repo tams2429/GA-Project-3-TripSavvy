@@ -8,16 +8,16 @@ router.route('/cities')
   .get(cities.index)
   .post(cities.create)
 
-
-
 router.route('/cities/:id')
   .get(cities.show)
   .delete(cities.delete)
   .put(cities.edit)
 
-
 router.route('/register')
   .post(auth.register)
+
+router.route('/login')
+  .post(auth.login)
 
 module.exports = router
 

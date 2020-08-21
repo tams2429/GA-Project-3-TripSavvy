@@ -2,27 +2,18 @@
 Are we meant to have some code in here?
 Repo. for GA SEI Group Project No. 3 (Full-Stack)
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-HEY GANG 
-=======
-This is a test feature and now dan's messign wit hits sd sd gerwf f 
->>>>>>> development
 
->>>>>>> development
 # Brief
 
 - **Deadline** Friday 28th Aug. (1.5 weeks),
 - **Full-stack** application,
-MAKE A PROBLEM 
-- **FrontBBREAK IT S**,
+
+- **Front-End**,
 - **Back-End** = **Node JS** with **Express** **(Server API)** and **Mongo DB** **(Database)**,
     - **CRUD** (Create Read Update Delete) functionality,
-HEY LETS RUIN THIS READ ME 
 
 - Have a **git repositry** hosted on **Github**,
-PROBELMS EVERY WHERE 
+
 
 - Be **deployed online** for **public accessibility**,
 

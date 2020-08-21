@@ -28,9 +28,34 @@ async function citiesCreate(req, res) {
   }
 }
 
+//delete
+async function citiesDelete(req, res) {
+  try {
+    await City.findByIdAndDelete(req.params.id)
+    res.sendStatus(204)
+  } catch (err) {
+    res.json(err)
+  }
+}
+
+//edit
+async function citiesEdit(req, res) {
+  try {
+    const editedCities = await City.findByIdAndUpdate(
+      req.params.id, 
+      req.body, 
+      { new: true, runValidators: true })
+    res.status(202).json(editedCities)
+  } catch (err) {
+    res.json(err)
+  }
+}
+
 
 module.exports = {
   index: citiesIndex,
   show: citiesShow,
-  create: citiesCreate
+  create: citiesCreate,
+  delete: citiesDelete,
+  edit: citiesEdit
 } 

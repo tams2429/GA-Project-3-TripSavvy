@@ -33,5 +33,17 @@ module.exports = [
     hasBeach: false,
     hasSnow: false,
     hasNature: false
+  },
+  
+  {
+    name: 'Birmingham',
+    country: 'England',
+    description: 'lovely curries, not much else',
+    hasNightLife: true, 
+    hasFoodScene: true,
+    hasCulture: true,
+    hasBeach: true,
+    hasSnow: false,
+    hasNature: true
   }
 ]

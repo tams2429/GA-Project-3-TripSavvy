@@ -11,6 +11,8 @@ router.route('/cities')
 
 router.route('/cities/:id')
   .get(cities.show)
+  .delete(cities.delete)
+  .put(cities.edit)
 
 module.exports = router
 

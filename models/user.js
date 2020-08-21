@@ -26,7 +26,7 @@ userSchema
 userSchema
   .pre('save', function(next) {
     if (this.isModified('password')) {
-      this.password = bcrypt.hashSync(this.password, bcrypt.genSalt())
+      this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync())
     }
     next()
   })

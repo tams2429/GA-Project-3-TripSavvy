@@ -23,7 +23,7 @@ Dan woz 'ere
 
 # MVP (By Weds 26th Aug?)
 
-- A homepage with some basic filters in the style of images (functions as a checkbox) that will search the Database with a few initial city records (i.e. 4/5) and present back a 'Show' Card containing information about the city,
+- A homepage with some basic filters in the style of images (functions as a checkbox) that will search the Database with a few initial city records (i.e. 4/5) and present back a 'Show    ' Card containing information about the city,
     - Within the 'Show' page, there will be added functionality for registered and logged in users, where they can add a city to their 'favorites' and/or 'wishlists'
 
     Home Page wireframe:

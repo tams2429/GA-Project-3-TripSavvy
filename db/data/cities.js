@@ -8,7 +8,7 @@ module.exports = [
     hasCulture: true,
     hasBeach: true,
     hasSnow: false,
-    hasNature: true,
+    hasNature: true
   },
 
   {

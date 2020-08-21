@@ -7,11 +7,15 @@ Repo. for GA SEI Group Project No. 3 (Full-Stack)
 
 - **Deadline** Friday 28th Aug. (1.5 weeks),
 - **Full-stack** application,
-- **Front-End** = **React JS**,
+MAKE A PROBLEM 
+- **FrontBBREAK IT S**,
 - **Back-End** = **Node JS** with **Express** **(Server API)** and **Mongo DB** **(Database)**,
     - **CRUD** (Create Read Update Delete) functionality,
-    - **Multiple Models/Collections** in Database,
+HEY LETS RUIN THIS READ ME 
+
 - Have a **git repositry** hosted on **Github**,
+PROBELMS EVERY WHERE 
+
 - Be **deployed online** for **public accessibility**,
 
 # Idea (Inspire trip, Grad trip, Take a Trip, TripSavvy)

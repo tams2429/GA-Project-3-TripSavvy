@@ -2,7 +2,7 @@
 Are we meant to have some code in here?
 Repo. for GA SEI Group Project No. 3 (Full-Stack)
 
-
+HEY GANG 
 # Brief
 
 - **Deadline** Friday 28th Aug. (1.5 weeks),

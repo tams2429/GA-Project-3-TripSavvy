@@ -2,7 +2,15 @@
 Are we meant to have some code in here?
 Repo. for GA SEI Group Project No. 3 (Full-Stack)
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+HEY GANG 
+=======
+This is a test feature and now dan's messign wit hits sd sd gerwf f 
+>>>>>>> development
 
+>>>>>>> development
 # Brief
 
 - **Deadline** Friday 28th Aug. (1.5 weeks),

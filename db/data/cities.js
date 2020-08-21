@@ -1,19 +1,19 @@
 module.exports = [
   {
     name: 'Edinburgh',
-    coutry: 'Scotland',
+    country: 'Scotland',
     description: 'Historic Scottish capital city with lots to see, buzzing restaurant scene, old pubs and great walks.',
     hasNightLife: true, 
     hasFoodScene: true,
     hasCulture: true,
     hasBeach: true,
     hasSnow: false,
-    hasNature: true,
+    hasNature: true
   },
 
   {
     name: 'Budapest',
-    coutry: 'Hungary',
+    country: 'Hungary',
     description: 'Cool city in Hungary that is called Budapest',
     hasNightLife: true, 
     hasFoodScene: true,
@@ -25,7 +25,7 @@ module.exports = [
 
   {
     name: 'New York',
-    coutry: 'USA',
+    country: 'USA',
     description: 'the Big Apple. Nice cheesecakes 🍰',
     hasNightLife: true, 
     hasFoodScene: true,
@@ -33,5 +33,17 @@ module.exports = [
     hasBeach: false,
     hasSnow: false,
     hasNature: false
+  },
+  
+  {
+    name: 'Birmingham',
+    country: 'England',
+    description: 'lovely curries, not much else',
+    hasNightLife: true, 
+    hasFoodScene: true,
+    hasCulture: true,
+    hasBeach: true,
+    hasSnow: false,
+    hasNature: true
   }
 ]

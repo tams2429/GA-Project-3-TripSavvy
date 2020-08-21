@@ -1,11 +1,20 @@
 module.exports = [
   {
-    userName: "joe",
-    email: "joe@email",
-    password: "pass",
-    passwordConfirmation: "pass",
-    // userWishListed: ["vienna"],
-    // userFavorited: ["vienna"],
-    // userReview: []
+    username: 'eliza',
+    email: 'eliza@email',
+    password: 'pass',
+    passwordConfirmation: 'pass'
+  },
+  {
+    username: 'siu kei',
+    email: 'siu-kei@email',
+    password: 'pass',
+    passwordConfirmation: 'pass'
+  },
+  {
+    username: 'dan',
+    email: 'dan@email',
+    password: 'pass',
+    passwordConfirmation: 'pass'
   }
 ]

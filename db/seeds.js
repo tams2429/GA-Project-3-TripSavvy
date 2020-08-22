@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const { dbURI } = require('../config/environment')
 const City = require('../models/city')
 const cityData = require('./data/cities')
+const User = require('../models/user')
+const userData = require('./data/users')
 
 
 mongoose.connect(
@@ -20,7 +22,16 @@ mongoose.connect(
 
       console.log('Database Dropped 👍')
 
-      const cities = await City.create(cityData) //  We re create all that data
+      const users = await User.create(userData) 
+
+      console.log(`${'🙂'.repeat(users.length)} created`)
+
+      const citiesWithUsers = cityData.map(city => { 
+        city.user = users[0]._id
+        return city
+      })
+
+      const cities = await City.create(citiesWithUsers) //  We re create all that data
 
       console.log(`${'🌇 '.repeat(cities.length)} Cities created `)
 

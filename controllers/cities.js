@@ -3,14 +3,14 @@ const City = require('../models/city')
 
 //index
 async function citiesIndex(req, res) {
-  const cities = await City.find()
+  const cities = await City.find().populate('user')
   res.status(200).json(cities)
 }
 
 //show
 async function citiesShow(req, res) {
   try {
-    const city = await City.findById(req.params.id)
+    const city = await (await City.findById(req.params.id)).populated('user')
     if (!city) throw new Error()
     res.status(200).json(city)
   } catch (err) {

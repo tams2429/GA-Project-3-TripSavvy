@@ -7,8 +7,9 @@ import Navbar from './components/NavBar'
 const App = () => (
 
   <BrowserRouter>
-    <Navbar />
+    
     <main>
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
       </Switch>

@@ -2,13 +2,13 @@ import React from 'react'
 
 
 
-class HomePage extends React.Component {
+class Home extends React.Component {
 
   render() {
     return (
       <div className="HomePage">
         <div className="Title">
-          <h1>Select what you want...</h1>
+          <h1>HOME</h1>
         </div>
         <div className="Categories">
           <div className="Category1">
@@ -35,4 +35,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage
+export default Home

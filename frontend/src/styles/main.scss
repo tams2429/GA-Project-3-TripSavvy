@@ -1,40 +1,6 @@
-//* Global Styles
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import '~bulma/bulma.sass';
+
+.nav-dropdown {
+  text-align: end;
 }
 
-body {
-  height: 55vw;
-  #root {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-//* HomePage Styles
-.HomePage {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid black;
-  .Title {
-    width: 80%;
-    border: 1px solid black;
-  }
-  .Categories {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 80%;
-    height: 60%;
-    border: 1px solid black;
-    div {
-      width: 25%;
-      border: 1px solid black;
-      margin: 20px;
-    }
-  }
-}

@@ -1,12 +1,22 @@
 import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import HomePage from './HomePage'
-import NavBar from './common/NavBar'
+import Home from './components/Home'
+import Navbar from './common/NavBar'
 
-const App = () => {
-  return (
-    <HomePage />
-  )
-}
+const App = () => (
+
+  <BrowserRouter>
+    
+    <main>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+      </Switch>
+    </main> 
+
+  </BrowserRouter>
+
+)
 
 export default App

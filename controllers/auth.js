@@ -3,18 +3,16 @@ const jwt = require('jsonwebtoken')
 const { unauthorized } = require('../lib/errorMessage')
 const { secret } = require('../config/environment')
 
-//REGISTRATION
-async function register(req, res) {
+async function register(req, res, next) {
   try {
     const user = await User.create(req.body)
     res.status(201).json({ message: `Welcome ${user.username}` })
   } catch (err) {
-    res.status(422).json(err)
+    next(err)
   }
 }
 
-//LOGIN
-async function login(req, res) {
+async function login(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email }) 
     if (!user || !user.validatePassword(req.body.password)) { 
@@ -30,7 +28,7 @@ async function login(req, res) {
       token
     })
   } catch (err) {
-    res.json(err)
+    next(err)
   }
 }
 

@@ -14,6 +14,12 @@ router.route('/cities/:id')
   .delete(secureRoute, cities.delete)
   .put(secureRoute, cities.edit)
 
+router.route('/cities/:id/comments')
+  .post(secureRoute, cities.commentCreate)
+
+router.route('/cities/:id/comments/:commentId')
+  .delete(secureRoute, cities.commentDelete)
+
 router.route('/register')
   .post(auth.register)
 
@@ -21,4 +27,3 @@ router.route('/login')
   .post(auth.login)
 
 module.exports = router
-

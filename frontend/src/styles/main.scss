@@ -22,10 +22,28 @@
 }
 
 .commentBox {
-
   color: black;
   padding: 5%;
   padding-top: 0;
 }
 
+.profile-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.profile-name {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.profile-info {
+  text-align: center;
+  border: 1px solid rgb(225, 225, 225);
+  margin: 3rem 1.5rem;
+}
+
+.wishlist-form {
+  padding: 2rem;
+}

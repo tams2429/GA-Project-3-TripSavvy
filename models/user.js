@@ -10,17 +10,17 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema
-  .virtual('wishlistedCities', { //  <-- name of the virtual field
-    ref: 'City', //  <-- name of the other Model as a reference
-    localField: 'username', //  <-- the field from this model to match, so our users._id
-    foreignField: 'wishlistedUsers' //  <-- and the field to match is against on the City model
-  })
-
-userSchema
   .virtual('favoritedCities', {
     ref: 'City', 
     localField: 'username', 
-    foreignField: 'favoritedUsers' 
+    foreignField: 'favoritedUsers'   
+  })
+
+userSchema
+  .virtual('wishlistedCities', { 
+    ref: 'City', 
+    localField: 'username',
+    foreignField: 'wishlistedUsers'  
   })
 
 userSchema 

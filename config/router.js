@@ -16,13 +16,12 @@ router.route('/cities/:id')
   .put(secureRoute, cities.edit)
 
 
-
-router.route('cities/:id/wishlist')
+router.route('/cities/:id/wishlist')
   .post(secureRoute, cities.addToWishList)
 
-// router.route('/cities/:id/favorite')
-//   .post(secureRoute, cities.favoriteCity)
-//   .delete(secureRoute, cities.favoriteCity)
+router.route('/cities/:id/favorite')
+  .post(secureRoute, cities.addFavoriteCity)
+  .delete(secureRoute, cities.addFavoriteCity)
 
 router.route('/cities/:id/comments')
   .post(secureRoute, cities.commentCreate)

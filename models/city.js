@@ -12,16 +12,13 @@ const citiesSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   country: { type: String, required: true },
   description: { type: String, required: true, maxLength: 400 },
-  hasNightLife: { type: Boolean, required: true }, 
-  hasFoodScene: { type: Boolean, required: true },
-  hasCulture: { type: Boolean, required: true },
-  hasBeach: { type: Boolean, required: true },
-  hasSnow: { type: Boolean, required: true },
-  hasNature: { type: Boolean, required: true }, 
+  
+  categories: [{ type: String, enum: ['beach', 'night', 'culture', 'snow', 'food', 'nature'], required: true }],
+
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   comments: [commentSchema],
-  wishlistedUsers: []
-  // favoritedUsers: [{'id of users?'}, {'id of users?'}]
+  wishlistedUsers: [],
+  favoritedUsers: [] //to push users that favorited the city
 } , {
   timestamps: true
 })
@@ -29,3 +26,4 @@ const citiesSchema = new mongoose.Schema({
 citiesSchema.plugin(require('mongoose-unique-validator'))
 
 module.exports = mongoose.model('City', citiesSchema)
+

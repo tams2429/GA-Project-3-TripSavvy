@@ -101,6 +101,26 @@ async function addWishlistCity (req, res, next) {
   }
 }
 
+
+//favourite city
+
+async function addFavoriteCity (req, res, next) {
+  try {
+    const city = await City.findById(req.params.id)
+    if (!city) throw new Error(notFound)
+    const favoriteToAddToBody = req.body
+    favoriteToAddToBody.user = req.currentUser.username
+    city.wishlistedUsers.push(favoriteToAddToBody.user)
+    console.log(city)
+    await city.save()
+    res.status(201).json(city)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+
 module.exports = {
   index: citiesIndex,
   show: citiesShow,

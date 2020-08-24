@@ -19,7 +19,9 @@ const citiesSchema = new mongoose.Schema({
   hasSnow: { type: Boolean, required: true },
   hasNature: { type: Boolean, required: true }, 
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  comments: [commentSchema]
+  comments: [commentSchema],
+  wishlistedUsers: []
+  // favoritedUsers: [{'id of users?'}, {'id of users?'}]
 } , {
   timestamps: true
 })

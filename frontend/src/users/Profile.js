@@ -7,7 +7,7 @@ class Profile extends React.Component {
   state = {
     name: 'Bill Murray',
     profileImg: 'http://www.fillmurray.com/200/200',
-    bio: 'Always on the hunt for the next big adventure. #lovinlife 🤙',
+    about: 'Always on the hunt for the next big adventure. #lovinlife 🤙',
     wishlist: {
       item1: 'Berlin', //placeholders - will hopefully be able to add to list and generate state later
       item2: 'Sofia',
@@ -25,12 +25,12 @@ class Profile extends React.Component {
             <img className="is-rounded" src={this.state.profileImg} />
           </figure>
           <h1 className="profile-name">{this.state.name}</h1>  
-          <p>"{this.state.bio}"</p>     
+          <p>"{this.state.about}"</p>     
         </div>       
         <div className="columns">
           <div className="column is-one-half profile-info">
             <h1>Wishlist:</h1>
-            <form className="wishlist-form">
+            {/* <form className="wishlist-form">
               <div className="field">
                 <label className="label">
                 </label>
@@ -50,7 +50,7 @@ class Profile extends React.Component {
               <li>{this.state.wishlist.item2}</li>
               <li>{this.state.wishlist.item3}</li>
               <li>{this.state.wishlist.item4}</li>
-            </div>
+            </div> */}
 
           </div>        
           <div className="column is-one-half profile-info">

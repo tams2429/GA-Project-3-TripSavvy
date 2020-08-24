@@ -5,14 +5,9 @@ import { getAllCities } from './lib/api'
 class Home extends React.Component {
 
   state = {
-    hasNightLife: false,
-    hasFoodScene: false,
-    hasCulture: false,
-    hasBeach: false,
-    hasSnow: false,
-    hasNature: false,
+    categories: [],
     allCities: [],
-    selectedAttributes: [],
+    possibleCityOptions: [],
     selectedCity: []
   }
 
@@ -28,99 +23,40 @@ class Home extends React.Component {
 
   handleSelected = (event) => {
     console.log(event.target.id)
-    if (event.target.id === 'night') {
-      const currentState = this.state.hasNightLife
-      this.setState( { hasNightLife: !currentState } )
-    } else if (event.target.id === 'food') {
-      const currentState = this.state.hasFoodScene
-      this.setState( { hasFoodScene: !currentState } )
-    } else if (event.target.id === 'culture') {
-      const currentState = this.state.hasCulture
-      this.setState( { hasCulture: !currentState } )
-    } else if (event.target.id === 'beach') {
-      const currentState = this.state.hasBeach
-      this.setState( { hasBeach: !currentState } )
-    } else if (event.target.id === 'snow') {
-      const currentState = this.state.hasSnow
-      this.setState( { hasSnow: !currentState } )
-    } else if (event.target.id === 'nature') {
-      const currentState = this.state.hasNature
-      this.setState( { hasNature: !currentState } )
+    console.log(this.state.categories)
+    if (!this.state.categories.includes(event.target.id)){
+      const addedCategoryArray = [...this.state.categories, event.target.id]
+      console.log(addedCategoryArray)
+      this.setState({ categories: addedCategoryArray })
+    } else {
+      const selectedCategories = [ ...this.state.categories]
+      const removedCategoryArray = selectedCategories.filter( attribute => {
+        return attribute !== event.target.id
+      })
+      console.log(removedCategoryArray)
+      this.setState({ categories: removedCategoryArray })
     }
   }
-
-  // 
-  
-  // handleClick = async () => {
-  //   try {
-  //     const allCities = await getAllCities()
-  //     console.log(allCities)
-  //     this.setState( { allCities: allCities.data } )
-
-  //     //* Use array.filter to return array of cities that match categories
-  //     //! How to use filter to select cities which contain more than one selected category?
-  //     const allCitiesArray = allCities.data
-  //     const selectedCities = allCitiesArray.filter(city => {
-  //       if (city.hasNightLife === this.state.hasNightLife && this.state.hasNightLife) {
-  //         return city
-  //       }
-  //       if (city.hasFoodScene === this.state.hasFoodScene && this.state.hasFoodScene) {
-  //         return city
-  //       }
-  //       if (city.hasCulture === this.state.hasCulture && this.state.hasCulture) {
-  //         return city
-  //       }
-  //       if (city.hasBeach === this.state.hasBeach && this.state.hasBeach) {
-  //         return city
-  //       }
-  //       if (city.hasSnow === this.state.hasSnow && this.state.hasSnow) {
-  //         return city
-  //       }
-  //       if (city.hasNature === this.state.hasNature && this.state.hasNature) {
-  //         return city
-  //       }
-  //     })
-
-  //     //* Choose random city from cities that match selected categories
-  //     // console.log(selectedCities[Math.floor(Math.random() * selectedCities.length)])
-  //     const selectedCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
-  //     this.setState( { selectedCity } )
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
 
 
   handleClick = () => {
     try {
-      console.log(this.state)
       const allCitiesArray = this.state.allCities
-      const selectedCities = allCitiesArray.filter(city => {
-        if (city.hasNightLife && this.state.hasNightLife) {
-          return city
-        }
-        if (city.hasFoodScene && this.state.hasFoodScene) {
-          return city
-        }
-        if (city.hasCulture && this.state.hasCulture) {
-          return city
-        }
-        if (city.hasBeach && this.state.hasBeach) {
-          return city
-        }
-        if (city.hasSnow && this.state.hasSnow) {
-          return city
-        }
-        if (city.hasNature && this.state.hasNature) {
-          return city
-        }
-      })
-      console.log(selectedCities)
+      const selectedCategories = this.state.categories
+      const selectedCities = this.state.possibleCityOptions
 
-      //* Choose random city from cities that match selected categories
-      // console.log(selectedCities[Math.floor(Math.random() * selectedCities.length)])
+      allCitiesArray.forEach( city => {
+        const cityCategoryArray = city.categories
+        if (selectedCategories.every(category => cityCategoryArray.includes(category))) {
+          selectedCities.push(city)
+        } 
+      })
+      this.setState({ possibleCityOptions: selectedCities })
+
       const selectedCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
-      this.setState( { selectedCity } )
+      this.setState({ selectedCity }) // for some reason this is not setting into state 
+      console.log(selectedCity)
+      console.log(this.state)
     } catch (err) {
       console.log(err)
     }
@@ -136,7 +72,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">NightLife</h2>
+                    <h2 className="subtitle" id="night">NightLife</h2>
                   </div>
                 </div>
               </section>
@@ -145,7 +81,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">Food</h2>
+                    <h2 className="subtitle" id="food">Food</h2>
                   </div>
                 </div>
               </section>
@@ -154,7 +90,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">Culture</h2>
+                    <h2 className="subtitle" id="culture">Culture</h2>
                   </div>
                 </div>
               </section>
@@ -165,7 +101,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">Beach</h2>
+                    <h2 className="subtitle" id="beach">Beach</h2>
                   </div>
                 </div>
               </section>
@@ -174,7 +110,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">Snow</h2>
+                    <h2 className="subtitle" id="snow">Snow</h2>
                   </div>
                 </div>
               </section>
@@ -183,7 +119,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle">Nature</h2>
+                    <h2 className="subtitle" id="nature">Nature</h2>
                   </div>
                 </div>
               </section>

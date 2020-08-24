@@ -14,7 +14,7 @@ async function citiesIndex(req, res, next) {
 
 async function citiesShow(req, res, next) {
   try {
-    const city = await (await City.findById(req.params.id)).populate('user')
+    const city = await City.findById(req.params.id).populate('user')
     if (!city) throw new Error(notFound)
     res.status(200).json(city)
   } catch (err) {
@@ -86,6 +86,41 @@ async function citiesCommentDelete(req, res, next) {
   }
 }
 
+async function addWishlistCity (req, res, next) {
+  try {
+    const city = await City.findById(req.params.id)
+    if (!city) throw new Error(notFound)
+    const wishlistToAddBody = req.body
+    wishlistToAddBody.user = req.currentUser.username
+    city.wishlistedUsers.push(wishlistToAddBody.user)
+    console.log(city)
+    await city.save()
+    res.status(201).json(city)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+//favourite city
+
+async function addFavoriteCity (req, res, next) {
+  try {
+    const city = await City.findById(req.params.id)
+    if (!city) throw new Error(notFound)
+    const favoriteToAddToBody = req.body
+    favoriteToAddToBody.user = req.currentUser.username
+    city.wishlistedUsers.push(favoriteToAddToBody.user)
+    console.log(city)
+    await city.save()
+    res.status(201).json(city)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+
 module.exports = {
   index: citiesIndex,
   show: citiesShow,
@@ -93,5 +128,6 @@ module.exports = {
   delete: citiesDelete,
   edit: citiesEdit,
   commentCreate: citiesCommentCreate,
-  commentDelete: citiesCommentDelete
+  commentDelete: citiesCommentDelete,
+  addToWishList: addWishlistCity
 }

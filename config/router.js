@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const cities = require('../controllers/cities')
 const auth = require('../controllers/auth')
+const users = require('../controllers/users')
 const secureRoute = require('../lib/secureRoute')
 
 //routes:
@@ -14,6 +15,15 @@ router.route('/cities/:id')
   .delete(secureRoute, cities.delete)
   .put(secureRoute, cities.edit)
 
+
+
+router.route('cities/:id/wishlist')
+  .post(secureRoute, cities.addToWishList)
+
+// router.route('/cities/:id/favorite')
+//   .post(secureRoute, cities.favoriteCity)
+//   .delete(secureRoute, cities.favoriteCity)
+
 router.route('/cities/:id/comments')
   .post(secureRoute, cities.commentCreate)
 
@@ -25,5 +35,8 @@ router.route('/register')
 
 router.route('/login')
   .post(auth.login)
+
+router.route('/profile') // ? Route for a profile
+  .get(secureRoute, users.profile) // ? uses GET and MUST be  secureRoute, if its not, you would not know who you are supposed to be fetching the profile for.
 
 module.exports = router

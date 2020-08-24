@@ -9,8 +9,23 @@ const userSchema = new mongoose.Schema({
   about: { type: String, maxLength: 400 }
 })
 
+userSchema
+  .virtual('wishlistedCities', { //  <-- name of the virtual field
+    ref: 'City', //  <-- name of the other Model as a reference
+    localField: 'username', //  <-- the field from this model to match, so our users._id
+    foreignField: 'wishlistedUsers' //  <-- and the field to match is against on the City model
+  })
+
+userSchema
+  .virtual('favoritedCities', {
+    ref: 'City', 
+    localField: 'username', 
+    foreignField: 'favoritedUsers' 
+  })
+
 userSchema 
   .set('toJSON', {
+    virtuals: true,
     transform(doc, json) {
       delete json.passwords
       return json

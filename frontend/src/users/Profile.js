@@ -9,7 +9,7 @@ class Profile extends React.Component {
     profileImg: 'http://www.fillmurray.com/200/200',
     about: 'Always on the hunt for the next big adventure. #lovinlife 🤙',
     wishlist: {
-      item1: 'Berlin', //placeholders - will hopefully be able to add to list and generate state later
+      item1: 'London', //placeholders - will hopefully be able to add to list and generate state later
       item2: 'Sofia',
       item3: 'Madrid',
       item4: 'Oslo'

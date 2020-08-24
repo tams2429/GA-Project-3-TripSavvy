@@ -110,7 +110,7 @@ async function addFavoriteCity (req, res, next) {
     if (!city) throw new Error(notFound)
     const favoriteToAddToBody = req.body
     favoriteToAddToBody.user = req.currentUser.username
-    city.wishlistedUsers.push(favoriteToAddToBody.user)
+    city.favoritedUsers.push(favoriteToAddToBody.user)
     console.log(city)
     await city.save()
     res.status(201).json(city)
@@ -129,5 +129,6 @@ module.exports = {
   edit: citiesEdit,
   commentCreate: citiesCommentCreate,
   commentDelete: citiesCommentDelete,
-  addToWishList: addWishlistCity
+  addToWishList: addWishlistCity,
+  addFavoriteCity: addFavoriteCity
 }

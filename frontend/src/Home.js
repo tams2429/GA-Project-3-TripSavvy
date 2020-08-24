@@ -12,12 +12,19 @@ class Home extends React.Component {
     hasSnow: false,
     hasNature: false,
     allCities: [],
+    selectedAttributes: [],
     selectedCity: []
   }
 
-  // handleClick = () => {
-
-  // }
+  async componentDidMount() {
+    try {
+      const allCities = await getAllCities()
+      this.setState( { allCities: allCities.data } )
+      console.log(this.state.allCities)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   handleSelected = (event) => {
     console.log(event.target.id)
@@ -42,35 +49,73 @@ class Home extends React.Component {
     }
   }
 
-  handleClick = async () => {
-    try {
-      const allCities = await getAllCities()
-      // console.log(allCities)
-      this.setState( { allCities: allCities.data } )
+  // 
+  
+  // handleClick = async () => {
+  //   try {
+  //     const allCities = await getAllCities()
+  //     console.log(allCities)
+  //     this.setState( { allCities: allCities.data } )
 
-      //* Use array.filter to return array of cities that match categories
-      //! How to use filter to select cities which contain more than one selected category?
-      const allCitiesArray = allCities.data
+  //     //* Use array.filter to return array of cities that match categories
+  //     //! How to use filter to select cities which contain more than one selected category?
+  //     const allCitiesArray = allCities.data
+  //     const selectedCities = allCitiesArray.filter(city => {
+  //       if (city.hasNightLife === this.state.hasNightLife && this.state.hasNightLife) {
+  //         return city
+  //       }
+  //       if (city.hasFoodScene === this.state.hasFoodScene && this.state.hasFoodScene) {
+  //         return city
+  //       }
+  //       if (city.hasCulture === this.state.hasCulture && this.state.hasCulture) {
+  //         return city
+  //       }
+  //       if (city.hasBeach === this.state.hasBeach && this.state.hasBeach) {
+  //         return city
+  //       }
+  //       if (city.hasSnow === this.state.hasSnow && this.state.hasSnow) {
+  //         return city
+  //       }
+  //       if (city.hasNature === this.state.hasNature && this.state.hasNature) {
+  //         return city
+  //       }
+  //     })
+
+  //     //* Choose random city from cities that match selected categories
+  //     // console.log(selectedCities[Math.floor(Math.random() * selectedCities.length)])
+  //     const selectedCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
+  //     this.setState( { selectedCity } )
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+
+  handleClick = () => {
+    try {
+      console.log(this.state)
+      const allCitiesArray = this.state.allCities
       const selectedCities = allCitiesArray.filter(city => {
-        if (city.hasNightLife === this.state.hasNightLife && this.state.hasNightLife) {
+        if (city.hasNightLife && this.state.hasNightLife) {
           return city
         }
-        if (city.hasFoodScene === this.state.hasFoodScene && this.state.hasFoodScene) {
+        if (city.hasFoodScene && this.state.hasFoodScene) {
           return city
         }
-        if (city.hasCulture === this.state.hasCulture && this.state.hasCulture) {
+        if (city.hasCulture && this.state.hasCulture) {
           return city
         }
-        if (city.hasBeach === this.state.hasBeach && this.state.hasBeach) {
+        if (city.hasBeach && this.state.hasBeach) {
           return city
         }
-        if (city.hasSnow === this.state.hasSnow && this.state.hasSnow) {
+        if (city.hasSnow && this.state.hasSnow) {
           return city
         }
-        if (city.hasNature === this.state.hasNature && this.state.hasNature) {
+        if (city.hasNature && this.state.hasNature) {
           return city
         }
       })
+      console.log(selectedCities)
 
       //* Choose random city from cities that match selected categories
       // console.log(selectedCities[Math.floor(Math.random() * selectedCities.length)])
@@ -81,8 +126,8 @@ class Home extends React.Component {
     }
   }
 
+
   render() {
-    console.log(this.state)
     return (
       <section className="section">
         <div className="container ">

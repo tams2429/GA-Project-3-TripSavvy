@@ -88,11 +88,9 @@ async function citiesCommentDelete(req, res, next) {
 
 async function addWishlistCity (req, res, next) {
   try {
-    const city = await City.findById(req.params.id)
+    const city = await City.findById(req.params.id).populate('user')
     if (!city) throw new Error(notFound)
-    const wishlistToAddBody = req.body
-    wishlistToAddBody.user = req.currentUser.username
-    city.wishlistedUsers.push(wishlistToAddBody.user)
+    city.wishlistedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
     console.log(city)
     await city.save()
     res.status(201).json(city)
@@ -108,9 +106,7 @@ async function addFavoriteCity (req, res, next) {
   try {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
-    const favoriteToAddToBody = req.body
-    favoriteToAddToBody.user = req.currentUser.username
-    city.favoritedUsers.push(favoriteToAddToBody.user)
+    city.favouritedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
     console.log(city)
     await city.save()
     res.status(201).json(city)

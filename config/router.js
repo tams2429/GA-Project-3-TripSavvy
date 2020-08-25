@@ -17,11 +17,10 @@ router.route('/cities/:id')
 
 
 router.route('/cities/:id/wishlist')
-  .post(secureRoute, cities.addToWishList)
+  .post(secureRoute, cities.wishlistToggle)
 
 router.route('/cities/:id/favorite')
-  .post(secureRoute, cities.addFavoriteCity)
-  .delete(secureRoute, cities.addFavoriteCity)
+  .post(secureRoute, cities.favouriteToggle)
 
 router.route('/cities/:id/comments')
   .post(secureRoute, cities.commentCreate)

@@ -12,7 +12,8 @@ const citiesSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   country: { type: String, required: true },
   description: { type: String, required: true, maxLength: 400 },
-  
+  cityLatLng: { type: Array, required: false },
+  cityImg: { type: String, required: false },
   categories: [{ type: String, enum: ['beach', 'night', 'culture', 'snow', 'food', 'nature'], required: true }],
 
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },

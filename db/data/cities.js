@@ -23,7 +23,7 @@ module.exports = [
     country: 'USA',
     description: 'the Big Apple. Nice cheesecakes 🍰',
     categories: ['night', 'culture','food'],
-    cityLatLng: [40.730610, -73.935242.],
+    cityLatLng: [40.730610, -73.935242],
     cityImg: 'https://nypost.com/wp-content/uploads/sites/2/2017/11/tax-reform-ny.jpg?quality=90&strip=all&w=1200'
   },
   

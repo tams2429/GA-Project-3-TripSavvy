@@ -8,7 +8,7 @@ class cityCard extends React.Component {
 
   state = {
     cityLatLng: [	48.210033, 16.363449 ],
-    city: []
+    city: [  ]
   }
 
 
@@ -42,16 +42,14 @@ class cityCard extends React.Component {
             </div>
 
             <div className="column is-half">
-
               <p className="title">Map</p>  
-
               <MapGL
                 mapStyle='mapbox://styles/dnirns/cke9os3u24drt19p3ye2yzqpe'
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 height={'350px'}
                 width={''}
-                latitude={this.state.city.cityLatLng[0]}
-                longitude={this.state.city.cityLatLng[1]}
+                latitude={this.state.cityLatLng[0]}
+                longitude={this.state.cityLatLng[1]}
                 zoom={9.5}
               >
                 <Marker
@@ -61,7 +59,6 @@ class cityCard extends React.Component {
                   <div className="city-pin">📍</div>
                 </Marker>
               </MapGL>  
-
               <h1 className="title is-4">Comment and Review</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
               <p>

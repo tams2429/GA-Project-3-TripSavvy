@@ -5,7 +5,10 @@ const { notFound } = require('../lib/errorMessage')
 
 async function userProfile(req, res, next) {
   try {
+    console.log(req.currentUser._id)
+    console.log(await User.findById(req.currentUser._id))
     const user = await User.findById(req.currentUser._id).populate('wishlistedCities').populate('favoritedCities')
+    console.log(user)
     if (!user) throw new Error(notFound) 
     res.status(200).json(user)
   } catch (err) {

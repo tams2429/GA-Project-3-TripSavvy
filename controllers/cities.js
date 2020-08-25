@@ -62,6 +62,7 @@ async function citiesCommentCreate(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentBody = req.body
+    console.log('Comment Body:', commentBody)
     commentBody.user = req.currentUser._id
     city.comments.push(commentBody)
     await city.save()
@@ -76,6 +77,7 @@ async function citiesCommentDelete(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentToDelete = city.comments.id(req.params.commentId)
+    console.log('commentToDelete:', commentToDelete)
     if (!commentToDelete) throw new Error(notFound)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
     await commentToDelete.remove()

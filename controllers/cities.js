@@ -88,56 +88,38 @@ async function citiesCommentDelete(req, res, next) {
   }
 }
 
-async function addWishlistCity (req, res, next) {
-  try {
-    const city = await City.findById(req.params.id).populate('wishlistedUsers')
-    if (!city) throw new Error(notFound)
-    city.wishlistedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
-    console.log(city)
-    await city.save()
-    res.status(201).json(city)
-  } catch (err) {
-    next(err)
-  }
-}
 
-async function deleteWishlistCity (req, res, next) {
-  try {
-    const city = await City.findById(req.params.id).populate('wishlistedUsers')
-    if (!city) throw new Error(notFound)
-    
-    const wishlistedUsersArray = city.wishlistedUsers
-    console.log('wishlistedUsersArray', wishlistedUsersArray)
 
-    let wishIndex = ''
-    for (let i = 0; i < wishlistedUsersArray.length; i++) {
-      if (wishlistedUsersArray[i]._id.equals(req.currentUser._id)) {
-        wishIndex = i
-      }
+async function wishListToggle(req, res, next) {
+  try {
+    const city = await City.findById(req.params.id)
+    if (!city) throw new Error(notFound)
+    if (!city.wishlistedUsers.includes(req.currentUser._id)) {
+      city.wishlistedUsers.push(req.currentUser._id)
+    } else {
+      city.wishlistedUsers = city.wishlistedUsers.filter(id => !id.equals(req.currentUser._id))
     }
-    console.log('wish index', wishIndex)
-  
-    await city.wishlistedUsers[wishIndex].remove()
-
     await city.save()
-    res.status(201).json(city)
-  } catch (err) {
+    res.status(200).json(city)
+  } catch  (err) {
     next(err)
   }
 }
-
 
 //favourite city
 
-async function addFavoriteCity (req, res, next) {
+async function favouriteToggle(req, res, next) {
   try {
-    const city = await City.findById(req.params.id).populate('favouritedUsers')
+    const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
-    city.favouritedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
-    console.log(city)
+    if (!city.favoritedUsers.includes(req.currentUser._id)) {
+      city.favoritedUsers.push(req.currentUser._id)
+    } else {
+      city.favoritedUsers = city.favoritedUsers.filter(id => !id.equals(req.currentUser._id))
+    }
     await city.save()
-    res.status(201).json(city)
-  } catch (err) {
+    res.status(200).json(city)
+  } catch  (err) {
     next(err)
   }
 }
@@ -152,7 +134,6 @@ module.exports = {
   edit: citiesEdit,
   commentCreate: citiesCommentCreate,
   commentDelete: citiesCommentDelete,
-  addToWishList: addWishlistCity,
-  deleteFromWishList: deleteWishlistCity,
-  addFavoriteCity: addFavoriteCity
+  wishlistToggle: wishListToggle,
+  favouriteToggle: favouriteToggle
 }

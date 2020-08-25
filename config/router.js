@@ -18,6 +18,7 @@ router.route('/cities/:id')
 
 router.route('/cities/:id/wishlist')
   .post(secureRoute, cities.addToWishList)
+  .delete(secureRoute, cities.deleteFromWishList)
 
 router.route('/cities/:id/favorite')
   .post(secureRoute, cities.addFavoriteCity)

@@ -62,6 +62,7 @@ async function citiesCommentCreate(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentBody = req.body
+    console.log('Comment Body:', commentBody)
     commentBody.user = req.currentUser._id
     city.comments.push(commentBody)
     await city.save()
@@ -76,6 +77,7 @@ async function citiesCommentDelete(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentToDelete = city.comments.id(req.params.commentId)
+    console.log('commentToDelete:', commentToDelete)
     if (!commentToDelete) throw new Error(notFound)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
     await commentToDelete.remove()
@@ -93,9 +95,31 @@ async function addWishlistCity (req, res, next) {
     const wishlistToAddBody = req.body
     wishlistToAddBody.user = req.currentUser.username
     city.wishlistedUsers.push(wishlistToAddBody.user)
-    console.log(city)
+    // console.log(city)
     await city.save()
     res.status(201).json(city)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function deleteWishlistCity (req, res, next) {
+  try {
+    const city = await (await City.findById(req.params.id)).populate('wishlistedUsers')
+    console.log('city:',city)
+    if (!city) throw new Error(notFound)
+    // const wishlistedUsersArray = city.wishlistedUsers
+    // const wishlistedUserToDeleteBody = req.body
+    // console.log('wishlistUsersArray', wishlistedUsersArray)
+
+
+    // wishlistedUserToDeleteBody.user = req.currentUser.username
+
+
+    // await city.save()
+    res.status(202).json(city)
+    // console.log(city)
+
   } catch (err) {
     next(err)
   }
@@ -111,7 +135,7 @@ async function addFavoriteCity (req, res, next) {
     const favoriteToAddToBody = req.body
     favoriteToAddToBody.user = req.currentUser.username
     city.favoritedUsers.push(favoriteToAddToBody.user)
-    console.log(city)
+    // console.log(city)
     await city.save()
     res.status(201).json(city)
   } catch (err) {
@@ -130,5 +154,6 @@ module.exports = {
   commentCreate: citiesCommentCreate,
   commentDelete: citiesCommentDelete,
   addToWishList: addWishlistCity,
+  deleteFromWishList: deleteWishlistCity,
   addFavoriteCity: addFavoriteCity
 }

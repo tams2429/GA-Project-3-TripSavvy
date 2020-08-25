@@ -48,8 +48,8 @@ class cityCard extends React.Component {
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                 height={'350px'}
                 width={''}
-                latitude={this.state.cityLatLng[0]}
-                longitude={this.state.cityLatLng[1]}
+                latitude={this.state.city.cityLatLng[0]}
+                longitude={this.state.city.cityLatLng[1]}
                 zoom={9.5}
               >
                 <Marker

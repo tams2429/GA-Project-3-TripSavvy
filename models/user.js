@@ -12,14 +12,14 @@ const userSchema = new mongoose.Schema({
 userSchema
   .virtual('favoritedCities', {
     ref: 'City', 
-    localField: 'username', 
+    localField: '_id', 
     foreignField: 'favoritedUsers'   
   })
 
 userSchema
   .virtual('wishlistedCities', { 
     ref: 'City', 
-    localField: 'username',
+    localField: '_id',
     foreignField: 'wishlistedUsers'  
   })
 

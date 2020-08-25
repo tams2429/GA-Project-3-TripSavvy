@@ -3,7 +3,7 @@ const { notFound, unauthorized } = require('../lib/errorMessage')
 
 async function citiesIndex(req, res, next) {
   try {
-    const cities = await City.find().populate('user')
+    const cities = await City.find().populate('user').populate('wishlistedUsers').populate('favouritedUsers')
     if (!cities) throw new Error(notFound)
     res.status(200).json(cities)
   } catch (err) {
@@ -90,12 +90,10 @@ async function citiesCommentDelete(req, res, next) {
 
 async function addWishlistCity (req, res, next) {
   try {
-    const city = await City.findById(req.params.id)
+    const city = await City.findById(req.params.id).populate('wishlistedUsers')
     if (!city) throw new Error(notFound)
-    const wishlistToAddBody = req.body
-    wishlistToAddBody.user = req.currentUser.username
-    city.wishlistedUsers.push(wishlistToAddBody.user)
-    // console.log(city)
+    city.wishlistedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
+    console.log(city)
     await city.save()
     res.status(201).json(city)
   } catch (err) {
@@ -105,21 +103,24 @@ async function addWishlistCity (req, res, next) {
 
 async function deleteWishlistCity (req, res, next) {
   try {
-    const city = await (await City.findById(req.params.id)).populate('wishlistedUsers')
-    console.log('city:',city)
+    const city = await City.findById(req.params.id).populate('wishlistedUsers')
     if (!city) throw new Error(notFound)
-    // const wishlistedUsersArray = city.wishlistedUsers
-    // const wishlistedUserToDeleteBody = req.body
-    // console.log('wishlistUsersArray', wishlistedUsersArray)
+    
+    const wishlistedUsersArray = city.wishlistedUsers
+    console.log('wishlistedUsersArray', wishlistedUsersArray)
 
+    let wishIndex = ''
+    for (let i = 0; i < wishlistedUsersArray.length; i++) {
+      if (wishlistedUsersArray[i]._id.equals(req.currentUser._id)) {
+        wishIndex = i
+      }
+    }
+    console.log('wish index', wishIndex)
+  
+    await city.wishlistedUsers[wishIndex].remove()
 
-    // wishlistedUserToDeleteBody.user = req.currentUser.username
-
-
-    // await city.save()
-    res.status(202).json(city)
-    // console.log(city)
-
+    await city.save()
+    res.status(201).json(city)
   } catch (err) {
     next(err)
   }
@@ -130,12 +131,10 @@ async function deleteWishlistCity (req, res, next) {
 
 async function addFavoriteCity (req, res, next) {
   try {
-    const city = await City.findById(req.params.id)
+    const city = await City.findById(req.params.id).populate('favouritedUsers')
     if (!city) throw new Error(notFound)
-    const favoriteToAddToBody = req.body
-    favoriteToAddToBody.user = req.currentUser.username
-    city.favoritedUsers.push(favoriteToAddToBody.user)
-    // console.log(city)
+    city.favouritedUsers.push(req.currentUser._id) // <-- * just get this person from the token, no need for a body
+    console.log(city)
     await city.save()
     res.status(201).json(city)
   } catch (err) {

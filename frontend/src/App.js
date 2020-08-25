@@ -5,6 +5,8 @@ import Home from './Home'
 import Navbar from './common/NavBar'
 import cityCard from './cities/cityCard'
 import Profile from './users/Profile'
+import Register from './auth/Register'
+import Login from './/auth/Login'
 
 const App = () => (
 
@@ -16,6 +18,8 @@ const App = () => (
         <Route exact path="/" component={Home} />
         <Route path="/cities/:id" component={cityCard} />
         <Route path="/profile" component={Profile} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
       </Switch>
     </main> 
 

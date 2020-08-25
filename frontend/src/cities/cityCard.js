@@ -7,7 +7,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 class cityCard extends React.Component {
 
   state = {
-    cityLatLng: [	48.210033, 16.363449 ],
     city: null
   }
 

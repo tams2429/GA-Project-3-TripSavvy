@@ -10,6 +10,8 @@ class NavBar extends React.Component {
     this.setState({ navbarOpen: !this.state.navbarOpen })
   }
 
+
+
   render() {
 
     return (

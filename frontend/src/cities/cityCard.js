@@ -16,14 +16,12 @@ class cityCard extends React.Component {
     try {
       const city = await getSingleCity(cityId)
       this.setState({ city: city.data })
-      // console.log(this.state.city)
     } catch (err) {
       console.log(err)
     }
   }
 
   render() {
-    // console.log(this.state.city.cityLatLng)
     if (!this.state.city) return null
     return (
 

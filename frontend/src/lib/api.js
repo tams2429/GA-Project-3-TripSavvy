@@ -36,8 +36,8 @@ export const deleteCity = (id) => {
 }
 
 //* Profile Page Requests
-export const getProfile = (id) => {
-  return axios.get(`/api/profile/${id}`, withHeaders())
+export const getProfile = () => {
+  return axios.get('/api/profile', withHeaders())
 }
 
 //* Create a City Page Request

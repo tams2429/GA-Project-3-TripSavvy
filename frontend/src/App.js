@@ -6,7 +6,7 @@ import Navbar from './common/NavBar'
 import cityCard from './cities/cityCard'
 import Profile from './users/Profile'
 import Register from './auth/Register'
-import Login from './/auth/Login'
+import Login from './auth/Login'
 
 const App = () => (
 

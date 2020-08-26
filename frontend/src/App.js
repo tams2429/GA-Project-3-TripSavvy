@@ -12,8 +12,7 @@ import EditCity from './cities/EditCity'
 
 const App = () => (
 
-  <BrowserRouter>
-    
+  <BrowserRouter>   
     <main>
       <Navbar />
       <Switch>
@@ -24,7 +23,6 @@ const App = () => (
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/createcity" component={CreateCity} />
- 
       </Switch>
     </main> 
 

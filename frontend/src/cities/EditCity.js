@@ -1,7 +1,7 @@
 import React from 'react'
 import { editCity, getSingleCity  } from '../lib/api'
 import CityForm from './CityForm'
-
+// import ImageUploader from 'react-images-upload'
 
 class EditCity extends React.Component {
   state = {
@@ -71,6 +71,7 @@ class EditCity extends React.Component {
     }
   }
 
+
   render() {
     console.log(this.state.data)
     return (
@@ -85,6 +86,7 @@ class EditCity extends React.Component {
               data={this.state.data}
               options={this.options}
             />
+       
           </div>
         </div>
       </section>

@@ -124,8 +124,12 @@
   left: 0px;
   background-color: rgba(0,0,0,0.3);
 }
-.isSelected {
+.selected {
   border: 5px solid green;
+}
+
+.addMargin {
+  margin: 10px;
 }
 
 

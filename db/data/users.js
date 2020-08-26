@@ -4,7 +4,7 @@ module.exports = [
     email: 'eliza@email',
     password: 'pass',
     passwordConfirmation: 'pass',
-    profilePicture: 'https://www.fillmurray.com/300/300',
+    profilePicture: 'https://www.fillmurray.com/150/200',
     about: 'Bacon ipsum dolor amet t-bone meatball ham drumstick jerky boudin.'
   },
   {
@@ -12,7 +12,7 @@ module.exports = [
     email: 'siu-kei@email',
     password: 'pass',
     passwordConfirmation: 'pass',
-    profilePicture: 'https://www.fillmurray.com/300/300',
+    profilePicture: 'https://www.fillmurray.com/150/150',
     about: 'Flank tenderloin sirloin ball tip pork loin. Ball tip chicken shank, chislic salami biltong.'
   },
   {
@@ -20,7 +20,7 @@ module.exports = [
     email: 'dan@email',
     password: 'pass',
     passwordConfirmation: 'pass',
-    profilePicture: 'https://www.fillmurray.com/300/300',
+    profilePicture: 'https://www.fillmurray.com/150/150',
     about: 'Burgdoggen brisket t-bone, hamburger picanha chislic tongue meatloaf chicken salami.'
   }
 ]

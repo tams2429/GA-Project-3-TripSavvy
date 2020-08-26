@@ -139,9 +139,39 @@
 }
 
 //* cityCard Styles
-.background {
-  background-image: url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.imgur.com%2FCqwIfuw.png');
+// .background {
+//   background-image: url('https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fi.imgur.com%2FCqwIfuw.png');
+// }
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
+
+.favContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.ico {
+  border-radius: 50%;
+  cursor: pointer;
+  fill: #232323;
+  transition: .4s; 
+}
+
+.liked {
+  transform: scale(1.05) rotate(360deg);
+  background-color: #C62828;
+  padding: .3rem;
+  fill: white;
+}
+
+
+
 
 .cityCardBox {
 

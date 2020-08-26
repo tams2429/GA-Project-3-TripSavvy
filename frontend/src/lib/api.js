@@ -35,6 +35,14 @@ export const deleteCity = (id) => {
   return axios.delete(`/api/cities/${id}`, withHeaders())
 }
 
+export const favoriteToggle = (id) => {
+  return axios.post(`/api/cities/${id}/favorite`, {}, withHeaders())
+}
+
+export const wishListToggle = (id) => {
+  return axios.post(`/api/cities/${id}/wishlist`, {}, withHeaders())
+}
+
 //* Profile Page Requests
 export const getProfile = (id) => {
   return axios.get(`/api/profile/${id}`, withHeaders())

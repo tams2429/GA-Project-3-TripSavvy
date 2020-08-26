@@ -79,7 +79,7 @@ class CreateCity extends React.Component {
             <CityForm 
               handleChange={this.handleChange}
               handleSelectCategories={this.handleSelectCategories}
-              handleLlatLng={this.handleLatLng}
+              handleLatLng={this.handleLatLng}
               handleSubmit={this.handleSubmit}
               data={this.state.data}
               options={this.options}

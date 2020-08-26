@@ -1,8 +1,7 @@
 import React from 'react'
-import Select from 'react-select'
 import { createCity } from '../lib/api'
+import CityForm from './CityForm'
 
-import CreatableSelect from 'react-select/creatable'
 
 
 
@@ -42,17 +41,17 @@ class CreateCity extends React.Component {
     this.setState({ data, errors })
   }
 
-  handleSelectCatagories = selected => {
-    const selectedCatagories = selected ? selected.map(catagory => catagory.value) : []
-    const data = { ...this.state.data, categories: selectedCatagories }    
+  handleSelectCategories = selected => {
+    const selectedCategories = selected ? selected.map(category => category.value) : []
+    const data = { ...this.state.data, categories: selectedCategories }    
     this.setState({ data })
   }
 
 
 
   handleLatLng = selected => {
-    const selectedCatagories = selected ? selected.map(catagory => parseFloat(catagory.value)) : []
-    const data = { ...this.state.data, cityLatLng: selectedCatagories }    
+    const selectedCategories = selected ? selected.map(category => parseFloat(category.value)) : []
+    const data = { ...this.state.data, cityLatLng: selectedCategories }    
     this.setState({ data })
   }
 
@@ -77,73 +76,14 @@ class CreateCity extends React.Component {
       <section className="section">
         <div className="container">
           <div className="columns">
-            <form className="column">
-              <div className="field">
-                <label className="label">City Name</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    placeholder="City"
-                    name="name"
-                    value={this.state.data.name}
-                    onChange={this.handleChange}
-                  />
-                  <span></span>
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Country</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    placeholder="Country"
-                    name="country"
-                    value={this.state.data.country}
-                    onChange={this.handleChange}
-                  />
-                  <span></span>
-                </div>
-              </div> 
-
-              <div className="field">
-                <label className="label">Description</label>
-                <div className="control">
-                  <input
-                    className="textarea"
-                    name="description"
-                    value={this.state.data.description}
-                    onChange={this.handleChange}
-                  />
-                  <span></span>
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Enter Latitude then Longitude</label>
-                <CreatableSelect
-                  isMulti
-                  onChange={this.handleLatLng}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">City Characteristics</label>
-                <div className="control">
-                  <Select
-                    options={this.options}
-                    isMulti    
-                    onChange={this.handleSelectCatagories}               
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <button type="submit" 
-                  className="button is-fullwidth is-warning"
-                  onClick={this.handleSubmit}
-                >Submit</button>
-              </div>
-            </form>
+            <CityForm 
+              handleChange={this.handleChange}
+              handleSelectCategories={this.handleSelectCategories}
+              handleLlatLng={this.handleLatLng}
+              handleSubmit={this.handleSubmit}
+              data={this.state.data}
+              options={this.options}
+            />
           </div>
         </div>
       </section>

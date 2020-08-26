@@ -1,4 +1,6 @@
 import React from 'react'
+import MapGL, { Marker } from 'react-map-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 
 
@@ -9,15 +11,26 @@ class Profile extends React.Component {
     profileImg: 'http://www.fillmurray.com/200/200',
     about: 'Always on the hunt for the next big adventure. #lovinlife 🤙',
     wishlist: {
-      item1: 'London', //placeholders - will hopefully be able to add to list and generate state later
+      item1: 'London',
       item2: 'Sofia',
       item3: 'Madrid',
       item4: 'Oslo'
     },
-    myPlaces: [] //fill array with coordinates for map pins
+    myPlaces: [ 
+      { name: 'Budapest', cityLatLng: [47.49801, 19.03991] },
+      { name: 'Edinburgh', cityLatLng: [55.953251, -3.188267] },
+      { name: 'Birmingham', cityLatLng: [52.489471, -1.898575] }
+    ],
+    europeCenterLtLng: [53.0000, 9.0000]
   }
 
+
+
   render() {
+    this.state.myPlaces.map((city) => {
+      console.log(city.cityLatLng[0],city.cityLatLng[1] )
+    })
+    
     return (
       <section className="section">
         <div className="container profile-img">  
@@ -30,34 +43,32 @@ class Profile extends React.Component {
         <div className="columns">
           <div className="column is-one-half profile-info">
             <h1>Wishlist:</h1>
-            {/* <form className="wishlist-form">
-              <div className="field">
-                <label className="label">
-                </label>
-                <input
-                  type="text"
-                  className="input is-primary"
-                  placeholder=""
-                  name="wishlist"
-                />
-              </div>
-              <button type="submit" className="button">
-                  Add A Destination
-              </button>
-            </form>
-            <div className="wishlist">
-              <li>{this.state.wishlist.item1}</li>
-              <li>{this.state.wishlist.item2}</li>
-              <li>{this.state.wishlist.item3}</li>
-              <li>{this.state.wishlist.item4}</li>
-            </div> */}
 
           </div>        
           <div className="column is-one-half profile-info">
-            <figure className="image">
-              <h3>My Places</h3>
-              <img src="https://i.imgur.com/b97snWn.png" />
-            </figure>
+            <p className="title is-4">My Places</p>
+            <MapGL
+              mapStyle='mapbox://styles/dnirns/cke9os3u24drt19p3ye2yzqpe'
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+              height={'350px'}
+              width={''}
+              latitude={this.state.europeCenterLtLng[0]}
+              longitude={this.state.europeCenterLtLng[1]}
+              zoom={2.3}
+            >
+           
+              {this.state.myPlaces.map((city) =>
+                <Marker
+                  key={city.name}
+                  latitude={city.cityLatLng[0]}
+                  longitude={city.cityLatLng[1]}               
+                >
+                  <div className="city-pin">📍</div>
+                </Marker>
+              )}
+            </MapGL> 
+
+              
           </div>
         </div>
       </section>

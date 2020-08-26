@@ -7,6 +7,7 @@ import cityCard from './cities/cityCard'
 import Profile from './users/Profile'
 import Register from './auth/Register'
 import Login from './auth/Login'
+import CreateCity from './cities/CreateCity'
 
 const App = () => (
 
@@ -20,6 +21,7 @@ const App = () => (
         <Route path="/profile" component={Profile} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path="/createcity" component={CreateCity} />
       </Switch>
     </main> 
 

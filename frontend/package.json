@@ -12,6 +12,7 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-images-upload": "^1.2.8",
     "react-map-gl": "^5.2.7",
     "react-router-dom": "^5.2.0",

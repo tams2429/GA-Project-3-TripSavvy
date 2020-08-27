@@ -2,6 +2,7 @@ import React from 'react'
 import { getProfile } from '../lib/api.js'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -44,14 +45,18 @@ class Profile extends React.Component {
             <div className="column profile-info">
               <p className="title is-4">Wishlist:</p>
               {this.state.user.wishlistedCities.map((city) =>
-                <li key={city.name}>{city.name}</li>
+                <Link key={city.name} to={`/cities/${city._id}`}>
+                  <li >{city.name}</li>
+                </Link>
               )}
             </div> 
 
             <div className="column profile-info"> 
               <p className="title is-4">Favourites:</p>
               {this.state.user.favoritedCities.map((city) =>
-                <li key={city.name}>{city.name}</li>
+                <Link key={city.name} to={`/cities/${city._id}`}>
+                  <li >{city.name}</li>
+                </Link>
               )}
             </div>
 

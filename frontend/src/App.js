@@ -20,6 +20,7 @@ const App = () => (
       <Navbar />          
       <Switch>
         <Route exact path="/" component={Splash} />
+        
         <Route path="/cities/:id/edit" component={EditCity} />
         <Route path="/cities/:id" component={cityCard} />     
         <Route path="/profile" component={Profile} />
@@ -27,7 +28,7 @@ const App = () => (
         <Route path="/login" component={Login} />
         <Route path="/createcity" component={CreateCity} />
         <Route path="/home" component={Home} />
-        <Route path="/*" component={ErrorPage} />
+        <Route path="/*" component={ErrorPage} />       
       </Switch>
     </main> 
 

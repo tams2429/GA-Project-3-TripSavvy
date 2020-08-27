@@ -1,8 +1,9 @@
 import React from 'react'
 import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable'
+import ImageUpload from '../lib/ImageUpload'
 
-const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSubmit, data, options }) => {
+const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSubmit, handleImageChange, data, options }) => {
   return (
     <form className="column">
       <div className="field">
@@ -47,15 +48,11 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
       </div>
 
       <div className="field">
-        <label className="label">Image Url:</label>
         <div className="control">
-          <input
-            className="input"
-            name="cityImg"
-            value={data.cityImg}
-            onChange={handleChange}
+          <ImageUpload
+            labelText="City Image"
+            onChange={handleImageChange}
           />
-          <span></span>
         </div>
       </div>
 

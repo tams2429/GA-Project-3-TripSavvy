@@ -83,14 +83,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <section className="section">
-        <div className="container ">
+      <section className="section home">
+        <div className="container">
           <div className="columns home-row1">
             <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} id="night">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="night">NightLife</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="night">NightLife</h2>
                   </div>
                 </div>
               </section>
@@ -99,7 +99,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="food">Food</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="food">Food</h2>
                   </div>
                 </div>
               </section>
@@ -108,7 +108,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="culture">Culture</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="culture">Culture</h2>
                   </div>
                 </div>
               </section>
@@ -119,7 +119,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="beach">Beach</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="beach">Beach</h2>
                   </div>
                 </div>
               </section>
@@ -128,7 +128,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="snow">Snow</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="snow">Snow</h2>
                   </div>
                 </div>
               </section>
@@ -137,7 +137,7 @@ class Home extends React.Component {
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle" id="nature">Nature</h2>
+                    <h2 className="subtitle hvr-skew-forward" id="nature">Nature</h2>
                   </div>
                 </div>
               </section>

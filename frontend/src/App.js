@@ -11,6 +11,7 @@ import Login from './auth/Login'
 import CreateCity from './cities/CreateCity'
 import EditCity from './cities/EditCity'
 import Splash from './common/Splash'
+import ErrorPage from './common/ErrorPage'
 
 const App = () => (
    
@@ -20,14 +21,16 @@ const App = () => (
       <Navbar />
       <Notifications />          
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Splash} />
+        
         <Route path="/cities/:id/edit" component={EditCity} />
         <Route path="/cities/:id" component={cityCard} />     
         <Route path="/profile" component={Profile} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/createcity" component={CreateCity} />
-        <Route path="/splash" component={Splash} />
+        <Route path="/home" component={Home} />
+        <Route path="/*" component={ErrorPage} />       
       </Switch>
     </main> 
 

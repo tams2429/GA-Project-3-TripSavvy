@@ -85,7 +85,7 @@ module.exports = [
     name: 'Barcelona',
     country: 'Spain',
     description: 'Beaches, beautiful buildings and sangria what more could you want',
-    categories: ['beach', 'night', 'culture', 'food', 'nature', 'snow'],
+    categories: ['beach', 'night', 'culture', 'food'],
     cityLatLng: [41.3851, 2.1734],
     cityImg: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2017%2F04%2Fbarcelona-beach-umbrella-spain-europe-BEACHCITY0417.jpg'
   },

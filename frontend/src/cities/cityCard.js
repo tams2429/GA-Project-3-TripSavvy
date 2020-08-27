@@ -112,6 +112,7 @@ class cityCard extends React.Component {
     // console.log(this.state.city.favoritedUsers)
     // console.log('user_id from token is:', getPayload().sub)
     // console.log('State from backend:', this.state.data)
+    // console.log('user id is', getPayload().sub)
     return (
 
       <section className="section">

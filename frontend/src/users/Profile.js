@@ -30,10 +30,14 @@ class Profile extends React.Component {
     return this.state.user._id === getPayload().sub
   }
 
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
 
   render() {
     if (!this.state.user) return null
     console.log(this.state.user)
+    const username = this.capitalizeFirstLetter(this.state.user.about)
     return (
       <section className="section">
 
@@ -42,8 +46,8 @@ class Profile extends React.Component {
             <figure className="image is-150x150">
               <img className="is-rounded" src={this.state.user.profilePicture} />
             </figure>
-            <h1 className="profile-name">{this.state.user.username}</h1>  
-            <p>{this.state.user.about}</p>     
+            <h1 className="profile-name">{this.capitalizeFirstLetter(this.state.user.username)}</h1>  
+            <p>{this.capitalizeFirstLetter(this.state.user.about)}</p>     
           </div>       
           <div className="columns">
 
@@ -54,7 +58,7 @@ class Profile extends React.Component {
               <p className="title is-4">Wishlist:</p>
               {this.state.user.wishlistedCities.map((city) =>
                 <Link key={city.name} to={`/cities/${city._id}`}>
-                  <li >{city.name}</li>
+                  <li >{this.capitalizeFirstLetter(city.name)}</li>
                 </Link>
               )}
             </div> 
@@ -63,7 +67,7 @@ class Profile extends React.Component {
               <p className="title is-4">Favourites:</p>
               {this.state.user.favoritedCities.map((city) =>
                 <Link key={city.name} to={`/cities/${city._id}`}>
-                  <li >{city.name}</li>
+                  <li >{this.capitalizeFirstLetter(city.name)}</li>
                 </Link>
               )}
             </div>
@@ -75,7 +79,7 @@ class Profile extends React.Component {
                 return (
                   (city.user._id === getPayload().sub) ?
                     <Link key={city._id} to={`/cities/${city._id}`}>
-                      <li >{city.name}</li>
+                      <li>{this.capitalizeFirstLetter(city.name)}</li>
                     </Link>
                     :
                     <>

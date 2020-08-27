@@ -33,6 +33,7 @@ class Profile extends React.Component {
 
   render() {
     if (!this.state.user) return null
+    console.log(this.state.user)
     return (
       <section className="section">
 

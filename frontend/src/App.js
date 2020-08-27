@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Notifications from 'react-notify-toast'
 
 import Home from './Home'
 import Navbar from './common/NavBar'
@@ -16,7 +17,8 @@ const App = () => (
   <BrowserRouter>   
     
     <main>
-      <Navbar />          
+      <Navbar />
+      <Notifications />          
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/cities/:id/edit" component={EditCity} />

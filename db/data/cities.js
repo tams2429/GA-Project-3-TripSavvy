@@ -130,7 +130,7 @@ module.exports = [
     name: 'Galway',
     country: 'Ireland',
     description: 'The best way to experience County Galway’s distinctly Irish, wild coastline? Spend a weekend at the cozy Dolphin Beach House.',
-    categories: ['beach', 'night', 'culture', 'food', 'nature',
+    categories: ['beach', 'night', 'culture', 'food', 'nature'],
     cityLatLng: [53.2707, 9.0568],
     cityImg: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2017%2F04%2Fgalway-ireland-salthill-beach-ferris-wheel-BEACHCITY0417.jpg'
   },

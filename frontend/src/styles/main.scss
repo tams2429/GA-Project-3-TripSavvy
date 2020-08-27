@@ -146,6 +146,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  .titleAndEdit {
+    display: flex;
+    .editIcon {
+      margin: 10px;
+      cursor: pointer;
+    }
+  }
 }
 
 .favWishIcons {
@@ -192,13 +199,26 @@
   .commentDetails {
     font-size: 10px;
     font-style: italic;
+    display: flex;
+    justify-content: space-between;
+    .deleteComment {
+      cursor: pointer;
+    }
+    .deleteComment:hover {
+      fill: red;
+    }
   }
 }
 
 
 .addComment {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .button {
+    width: 30%;
+    margin-top: 10px;
+  }
 }
 
 

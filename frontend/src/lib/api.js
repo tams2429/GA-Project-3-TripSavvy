@@ -47,8 +47,8 @@ export const addComment = (formData, id) => {
   return axios.post(`/api/cities/${id}/comments`, formData, withHeaders())
 }
 
-export const deleteComment = (formData, cityId, commentId) => {
-  return axios.delete(`/api/cities/${cityId}/comments/${commentId}`, formData, withHeaders())
+export const deleteComment = (cityId, commentId) => {
+  return axios.delete(`/api/cities/${cityId}/comments/${commentId}`, withHeaders())
 }
 
 //* Profile Page Requests

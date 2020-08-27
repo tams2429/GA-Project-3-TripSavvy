@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getSingleCity, wishListToggle, favoriteToggle, addComment } from '../lib/api.js'
+import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment } from '../lib/api.js'
 import { getPayload } from '../lib/auth'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -27,6 +27,17 @@ class cityCard extends React.Component {
       console.log(err)
     }
   }
+
+  handleEdit = () => {
+    try {
+      const cityId = this.props.match.params.id
+      this.props.history.push(`/cities/${cityId}/edit`)
+    } catch (err) {
+      console.log(err)
+    } 
+  }
+
+
 
   handleToggle = async (event) => {
     const cityId = this.props.match.params.id
@@ -68,6 +79,18 @@ class cityCard extends React.Component {
     }
   }
 
+  handleDeleteComment = async (event) => {
+    const cityId = this.props.match.params.id
+    // console.log(event.target.id)
+    try {
+      await deleteComment(cityId, event.target.id)
+      const city = await getSingleCity(cityId)
+      this.setState( { city: city.data } )
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     console.log('State from backend:', this.state.city)
     
@@ -84,7 +107,12 @@ class cityCard extends React.Component {
           <div className="columns is-multiline box city-card">
             <div className="column is-half">
               <div className="titleRow">
-                <p className="title">{this.state.city.name}</p>
+                <div className="titleAndEdit">
+                  <p className="title">{this.state.city.name}</p>
+                  {this.state.city.user._id === getPayload().sub && 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onClick={this.handleEdit} className="editIcon"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>
+                  }
+                </div>
                 <div className="favWishIcons">
                   <div className="wishContainer">
                     <svg onClick={this.handleToggle} className={!this.state.city.wishlistedUsers.includes(getPayload().sub) ? "ico" : "ico wished"} id="wish" width="34" height="34" viewBox="0 0 24 24">
@@ -127,49 +155,23 @@ class cityCard extends React.Component {
               <h1 className="title is-4">Comment and Review</h1>
               {this.state.city.comments.map(comment => {
                 return (comment.user.includes(getPayload().sub) ? 
-                    <div key={comment._id} className="comments">
-                      <div className="commentBox">
-                        <div className="commentText">
-                          {comment.text}
-                          <br></br>
-                        </div>
-                        <div className="commentDetails">
+                  <div key={comment._id} className="comments">
+                    <div className="commentBox">
+                      <div className="commentText">
+                        {comment.text}
+                        <br></br>
+                      </div>
+                      <div className="commentDetails">
+                        <div className="commentInfo"> 
                           Comment created: {comment.createdAt.slice(0, 10)}
                           <br></br>
                           By user id: {comment.user}
                         </div>
-                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="deleteComment" onClick={this.handleDeleteComment} id={comment._id}><path id={comment._id} d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
                       </div>
-                      {/* <p className="commentCreator">
-                        user: {comment._id}, created: {comment.createdAt.slice(0, 10)}
-                      </p> */}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
                     </div>
-                    :
-                    <div key={comment._id} className="comments">
-                      <div className="commentBox">
-                        <div className="commentText">
-                          {comment.text}
-                          <br></br>
-                        </div>
-                        <div className="commentDetails">
-                          Comment created: {comment.createdAt.slice(0, 10)}
-                          <br></br>
-                          By user id: {comment.user}
-                        </div>
-                        
-                      </div>
-                      {/* <p className="commentCreator">
-                        user: {comment._id}, created: {comment.createdAt.slice(0, 10)}
-                      </p> */}
-                    </div>
-                  )
-                })}
-{/*                 
-                
-                )
-                return (
-                  
+                  </div>
+                  :
                   <div key={comment._id} className="comments">
                     <div className="commentBox">
                       <div className="commentText">
@@ -179,14 +181,13 @@ class cityCard extends React.Component {
                       <div className="commentDetails">
                         Comment created: {comment.createdAt.slice(0, 10)}
                         <br></br>
-                        By user id: {comment._id}
+                        By user id: {comment.user}
                       </div>
                       
                     </div>
-
                   </div>
                 )
-              })} */}
+              })}
               <form className="addComment">
                 <input
                   className="textarea"
@@ -199,10 +200,6 @@ class cityCard extends React.Component {
                   onClick={this.handleSubmit}
                 >Submit</button>
               </form>
-              <div className="addComment">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
-              </div>
-              
             </div>
           </div>
           <div>

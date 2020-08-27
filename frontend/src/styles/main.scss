@@ -273,6 +273,14 @@
   padding: 2rem;
 }
 
+//* Register styles
+.passwordField {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .visibleEyeIcon {
+    margin: 10px;
+  }
 
 li {
   list-style-type: none;

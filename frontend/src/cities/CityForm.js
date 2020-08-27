@@ -49,6 +49,7 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
 
       <div className="field">
         <div className="control">
+          <label className="label">City Picture</label>
           <ImageUpload
             labelText="City Image"
             onChange={handleImageChange}

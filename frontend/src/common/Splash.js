@@ -1,14 +1,18 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
+
 
 
 
 
 
 class Splash extends React.Component {
-
+  
 
   render() {
+ 
+
 
     return (
       <>
@@ -19,11 +23,12 @@ class Splash extends React.Component {
         }`
           }</style>
         </Helmet>
-        <section className="hero is-success is-fullheight">
+        <section className="hero is-fullheight splash-page">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title">            
-              </h1>          
+              <Link to='/Home'><h1 className="splash-text">TRIPSAVVY</h1></Link>       
+              <div>   
+              </div> 
             </div>
           </div>
         </section> 
@@ -32,8 +37,6 @@ class Splash extends React.Component {
   }
 
 }
-
-
 
 
 export default Splash

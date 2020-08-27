@@ -1,4 +1,5 @@
 @import '~bulma/bulma.sass';
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
 
 //* Home styles
 .home-row1, .home-row2 {
@@ -276,4 +277,17 @@ li {
 
 .wishlist-form {
   padding: 2rem;
+}
+
+
+
+//splash page
+.splash-page {
+  background-color: #F88379;
+}
+.splash-text {
+  color: white;
+  font-size: 10vw;
+  text-align: center;
+  font-family: 'Faster One', cursive; ;
 }

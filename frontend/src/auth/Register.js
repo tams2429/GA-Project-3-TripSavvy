@@ -57,27 +57,27 @@ class Register extends React.Component {
                 <label className="label">Username</label>
                 <div className="control">
                   <input
-                    className={`input ${this.state.errors.username ? 'is-danger' : '' }`}
+                    className={`input ${this.state.errors.username ? 'is-danger shake' : '' }`}
                     placeholder="Username"
                     name="username"
                     onChange={this.handleChange}
                     value={this.state.formData.username}
                   />
                 </div>
-                {this.state.errors.username && <small className="help is-danger">{this.state.errors.username}</small>}
+                {this.state.errors.username && <small className="help is-danger shake">{this.state.errors.username}</small>}
               </div>
               <div className="field">
                 <label className="label">Email</label>
                 <div className="control">
                   <input
-                    className={`input ${this.state.errors.email ? 'is-danger' : ''}`}
+                    className={`input ${this.state.errors.email ? 'is-danger shake' : ''}`}
                     placeholder="Email"
                     name="email"
                     onChange={this.handleChange}
                     value={this.state.formData.email}
                   />
                 </div>
-                {this.state.errors.email && <small className="help is-danger">{this.state.errors.email}</small>}
+                {this.state.errors.email && <small className="help is-danger shake">{this.state.errors.email}</small>}
               </div>
 
               <div className="field">
@@ -119,7 +119,7 @@ class Register extends React.Component {
                 </div>
                 <div className="control">
                   <input
-                    className={`input ${this.state.errors.password ? 'is-danger' : ''}`}
+                    className={`input ${this.state.errors.password ? 'is-danger shake' : ''}`}
                     placeholder="Password"
                     type={this.state.isPasswordShown ? 'text' : 'password' }
                     name="password"
@@ -128,13 +128,13 @@ class Register extends React.Component {
                   />
                   
                 </div>
-                {this.state.errors.password && <small className="help is-danger">{this.state.errors.password}</small>}
+                {this.state.errors.password && <small className="help is-danger shake">{this.state.errors.password}</small>}
               </div>
               <div className="field">
                 <label className="label">Password Confirmation</label>
                 <div className="control">
                   <input
-                    className={`input ${this.state.errors.passwordConfirmation ? 'is-danger' : ''}`}
+                    className={`input ${this.state.errors.passwordConfirmation ? 'is-danger shake' : ''}`}
                     placeholder="Password Confirmation"
                     type="password"
                     name="passwordConfirmation"
@@ -142,7 +142,7 @@ class Register extends React.Component {
                     value={this.state.formData.passwordConfirmation}
                   />
                 </div>
-                {this.state.errors.passwordConfirmation && <small className="help is-danger">{this.state.errors.passwordConfirmation}</small>}
+                {this.state.errors.passwordConfirmation && <small className="help is-danger shake">{this.state.errors.passwordConfirmation}</small>}
               </div>
               <div className="field">
                 <button

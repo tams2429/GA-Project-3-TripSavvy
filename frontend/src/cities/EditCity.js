@@ -1,5 +1,6 @@
 import React from 'react'
 import { editCity, getSingleCity  } from '../lib/api'
+import { popupSuccess, popupError } from '../lib/notification'
 import CityForm from './CityForm'
 
 
@@ -12,7 +13,8 @@ class EditCity extends React.Component {
       cityLatLng: [],
       cityImg: '',
       categories: []
-    }
+    },
+    errors: {}
   }
 
   options = [
@@ -65,8 +67,11 @@ class EditCity extends React.Component {
     try {
       await editCity(cityId, this.state.data)
       this.props.history.push(`/cities/${cityId}`)
+      popupSuccess('Edit Successful')
     } catch (err) {
-      console.log('error')
+      console.log('error', err)
+      popupError('You messed up...')
+      this.setState({ errors: err.response.data.errors })
     }
   }
 
@@ -84,8 +89,8 @@ class EditCity extends React.Component {
               handleSubmit={this.handleSubmit}
               data={this.state.data}
               options={this.options}
+              errors={this.state.errors}
             />
-       
           </div>
         </div>
       </section>

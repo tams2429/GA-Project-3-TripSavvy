@@ -1,5 +1,6 @@
 import React from 'react'
 import { createCity } from '../lib/api'
+import { popupSuccess, popupError } from '../lib/notification'
 import CityForm from './CityForm'
 
 
@@ -62,14 +63,18 @@ class CreateCity extends React.Component {
       const res = await createCity(this.state.data)
       console.log(res)
       this.props.history.push(`/cities/${res.data._id}`)
+      popupSuccess('Create Successful')
     } catch (err) {
       console.log('error', err)
+      popupError('Looks like you are missing something...')
       this.setState({ errors: err.response.data.errors })
     }
   }
 
 
   render() {
+    console.log('errors:', this.state.errors)
+    console.log('data:', this.state.data)
     return (
       <section className="section">
         <div className="container">
@@ -82,6 +87,7 @@ class CreateCity extends React.Component {
               data={this.state.data}
               options={this.options}
               handleImageChange={this.handleImageChange}
+              errors={this.state.errors}
             />
           </div>
         </div>

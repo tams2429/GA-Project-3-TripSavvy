@@ -3,20 +3,20 @@ import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import ImageUpload from '../lib/ImageUpload'
 
-const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSubmit, handleImageChange, data, options }) => {
+const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSubmit, handleImageChange, data, options, errors }) => {
   return (
     <form className="column">
       <div className="field">
         <label className="label">City Name</label>
         <div className="control">
           <input
-            className="input"
+            className={`input ${errors.name ? 'is-danger shake' : '' }`}
             placeholder="City"
             name="name"
             value={data.name}
             onChange={handleChange}
           />
-          <span></span>
+          {errors.name && <small className="help is-danger shake">{errors.name}</small>}
         </div>
       </div>
 
@@ -24,26 +24,27 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
         <label className="label">Country</label>
         <div className="control">
           <input
-            className="input"
+            className={`input ${errors.country ? 'is-danger shake' : '' }`}
             placeholder="Country"
             name="country"
             value={data.country}
             onChange={handleChange}
           />
-          <span></span>
+          {errors.country && <small className="help is-danger shake">{errors.country}</small>}
         </div>
       </div> 
 
       <div className="field">
         <label className="label">Description</label>
         <div className="control">
-          <input
-            className="textarea"
+          <textarea
+            className={`textarea ${errors.description ? 'is-danger shake' : '' }`}
             name="description"
+            maxLength="400"
             value={data.description}
             onChange={handleChange}
           />
-          <span></span>
+          {errors.description && <small className="help is-danger shake">{errors.description}</small>}
         </div>
       </div>
 
@@ -72,12 +73,15 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
           <Select
             options={options}
             isMulti    
-            onChange={handleSelectCategories}               
+            onChange={handleSelectCategories}
+            placeholder="Please select at least one from the list..."             
           />
         </div>
       </div>
       <div className="field">
-        <button type="submit" 
+        <button
+          disabled={data.cityLatLng.length < 2 || data.categories.length === 0} 
+          type="submit" 
           className="button is-fullwidth is-danger"
           onClick={handleSubmit}
         >Submit</button>

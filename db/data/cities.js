@@ -82,7 +82,7 @@ module.exports = [
   },
 
   {
-    name: 'Bercelona',
+    name: 'Barcelona',
     country: 'Spain',
     description: 'Beaches, beautiful buildings and sangria what more could you want',
     categories: ['beach', 'night', 'culture', 'food', 'nature', 'snow'],

@@ -26,7 +26,7 @@ class Splash extends React.Component {
         <section className="hero is-fullheight splash-page">
           <div className="hero-body">
             <div className="container">
-              <Link to='/Home'><h1 className="splash-text">TRIPSAVVY</h1></Link>       
+              <Link to='/Home'><h1 className="splash-text hvr-skew-forward">TRIPSAVVY</h1></Link>       
               <div>   
               </div> 
             </div>

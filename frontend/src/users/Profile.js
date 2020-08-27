@@ -1,7 +1,9 @@
 import React from 'react'
-import { getProfile } from '../lib/api.js'
+import { getProfile, getAllCities } from '../lib/api.js'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { Link } from 'react-router-dom'
+import { getPayload } from '../lib/auth.js'
 
 
 
@@ -9,17 +11,23 @@ class Profile extends React.Component {
 
   state = {
     user: null,
-    europeCenterLtLng: [53.0000, 9.0000]
+    europeCenterLtLng: [53.0000, 9.0000],
+    allCities: []
   }
 
   async componentDidMount() {
     try {
       const user = await getProfile() 
       this.setState({ user: user.data })
-      console.log(this.state.user)
+      const allCities = await getAllCities()
+      this.setState( { allCities: allCities.data } )
     } catch (err) {
       console.log(err)
     }
+  }
+
+  handleCreatedCity = () => {
+    return this.state.user._id === getPayload().sub
   }
 
 
@@ -44,18 +52,38 @@ class Profile extends React.Component {
             <div className="column profile-info">
               <p className="title is-4">Wishlist:</p>
               {this.state.user.wishlistedCities.map((city) =>
-                <li key={city.name}>{city.name}</li>
+                <Link key={city.name} to={`/cities/${city._id}`}>
+                  <li >{city.name}</li>
+                </Link>
               )}
             </div> 
 
             <div className="column profile-info"> 
               <p className="title is-4">Favourites:</p>
               {this.state.user.favoritedCities.map((city) =>
-                <li key={city.name}>{city.name}</li>
+                <Link key={city.name} to={`/cities/${city._id}`}>
+                  <li >{city.name}</li>
+                </Link>
               )}
             </div>
 
-            
+            <div className="column profile-info"> 
+              <p className="title is-4">Created Cities:</p>
+
+              {this.state.allCities.map(city => { 
+                return (
+                  (this.state.user._id === getPayload().sub) ?
+                    <Link key={city._id} to={`/cities/${city._id}`}>
+                      <li >{city.name}</li>
+                    </Link>
+                    :
+                    <>
+                    </>
+                )
+              })
+              }
+
+            </div>
 
 
 

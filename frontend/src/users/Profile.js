@@ -72,7 +72,7 @@ class Profile extends React.Component {
 
               {this.state.allCities.map(city => { 
                 return (
-                  (this.state.user._id === getPayload().sub) ?
+                  (city.user._id === getPayload().sub) ?
                     <Link key={city._id} to={`/cities/${city._id}`}>
                       <li >{city.name}</li>
                     </Link>

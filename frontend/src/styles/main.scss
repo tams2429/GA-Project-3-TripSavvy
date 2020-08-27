@@ -144,12 +144,33 @@
   align-items: flex-start;
 }
 
-.favContainer {
+.favWishIcons {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  .wishContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 15px;
+    .wished {
+      transform: scale(1.05) rotate(360deg);
+      fill: yellow;
+    }
+  }
+  .favContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .liked {
+      transform: scale(1.05) rotate(360deg);
+      background-color: #C62828;
+      padding: .3rem;
+      fill: white;
+    }
+  }
 }
 
 .ico {
@@ -159,34 +180,46 @@
   transition: .4s; 
 }
 
-.liked {
-  transform: scale(1.05) rotate(360deg);
-  background-color: #C62828;
-  padding: .3rem;
-  fill: white;
-}
-
-
-
-
-.cityCardBox {
-
-  color: black;
-  padding: 5%;
-}
-
-.mapBox {
-
-  color: black;
-  padding: 5%;
-  padding-bottom: 0;
-}
-
 .commentBox {
-  color: black;
-  padding: 5%;
-  padding-top: 0;
+  background: lightblue;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  .commentDetails {
+    font-size: 10px;
+    font-style: italic;
+  }
 }
+
+
+.addComment {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+// .cityCardBox {
+
+//   color: black;
+//   padding: 5%;
+// }
+
+// .mapBox {
+
+//   color: black;
+//   padding: 5%;
+//   padding-bottom: 0;
+// }
+
+// .commentBox {
+//   color: black;
+//   padding: 5%;
+//   padding-top: 0;
+// }
+
+//* Profile page styles
 
 .profile-img {
   display: flex;

@@ -3,7 +3,7 @@ const { notFound, unauthorized } = require('../lib/errorMessage')
 
 async function citiesIndex(req, res, next) {
   try {
-    const cities = await City.find().populate('user').populate('wishlistedUsers').populate('favouritedUsers')
+    const cities = await City.find().populate('user').populate('wishlistedUsers').populate('favoritedUsers')
     if (!cities) throw new Error(notFound)
     res.status(200).json(cities)
   } catch (err) {
@@ -112,10 +112,15 @@ async function favouriteToggle(req, res, next) {
   try {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
+    console.log(req.currentUser._id)
     if (!city.favoritedUsers.includes(req.currentUser._id)) {
+      console.log('current user not in array')
       city.favoritedUsers.push(req.currentUser._id)
     } else {
+      console.log('current user is already in array')
+      console.log('Before:', city.favoritedUsers)
       city.favoritedUsers = city.favoritedUsers.filter(id => !id.equals(req.currentUser._id))
+      console.log('After:', city.favoritedUsers)
     }
     await city.save()
     res.status(200).json(city)

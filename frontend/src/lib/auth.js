@@ -7,7 +7,7 @@ export const getToken = () => {
 export const logout = () => {
   window.localStorage.removeItem('token')
 }
-const getPayload = () => {
+export const getPayload = () => {
   const token = getToken()
   if (!token) return false
   const parts = token.split('.')

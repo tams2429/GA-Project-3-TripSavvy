@@ -1,5 +1,7 @@
 import React from 'react'
-import { getSingleCity, wishListToggle, favoriteToggle } from '../lib/api.js'
+
+import { getSingleCity, wishListToggle, favoriteToggle, addComment } from '../lib/api.js'
+import { getPayload } from '../lib/auth'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -8,7 +10,10 @@ class cityCard extends React.Component {
 
   state = {
     city: null,
-    favorited: false
+    data: {
+      text: ''
+    },
+    errors: {}
   }
 
 
@@ -23,53 +28,54 @@ class cityCard extends React.Component {
     }
   }
 
-  handleToggle = async () => {
+  handleToggle = async (event) => {
     const cityId = this.props.match.params.id
-    console.log(cityId)
-    if (!this.state.favorited) {
-      //! Replace Hardcoded current user id no. with user id
-      // const newFavoritedUsers = {...this.state.city, favoritedUsers: [...this.state.city.favoritedUsers, '5f4645c4369551235cc6b351']}
-      // console.log('To be set state:', newFavoritedUsers)
-      // this.setState( { favorited: !this.state.favorited } )
-      // this.setState( { city: newFavoritedUsers } )
+    // console.log(cityId)
+    console.log(event.target.id)
+    if (event.target.id === 'wish') {
       try {
-        await favoriteToggle(cityId)
+        await wishListToggle(cityId)
         const city = await getSingleCity(cityId)
         this.setState( { city: city.data } )
-        this.setState( { favorited: !this.state.favorited } )
-        // this.setState( { city: newFavoritedUsers } )
       } catch (err) {
         console.log(err)
       }
-    }  else {
-      // const favoritedUsersArray = [...this.state.city.favoritedUsers]
-      // console.log('Favorited users array to be filtered:', favoritedUsersArray)
-
-      // //! Replace Hardcoded current user id no. with user id
-      // const filteredFavoritedUsers = favoritedUsersArray.filter(user => {
-      //   return user !== '5f4645c4369551235cc6b351'
-      // })
-      // console.log('New array to be set to state:', filteredFavoritedUsers)
-      // const newFavoritedUsers = {...this.state.city, favoritedUsers: filteredFavoritedUsers}
-      // console.log('To be set state:', newFavoritedUsers)
-      // this.setState( { favorited: !this.state.favorited } )
-      // this.setState( { city: newFavoritedUsers } )
-
+    } else {
       try {
         await favoriteToggle(cityId)
         const city = await getSingleCity(cityId)
         this.setState( { city: city.data } )
-        this.setState( { favorited: !this.state.favorited } )
       } catch (err) {
         console.log(err)
       }
     }
   }
 
+  handleChange = event => {
+    const data = { ...this.state.data, [event.target.name]: event.target.value }
+    const errors = { ...this.state.errors, [event.target.name]: '' }
+    this.setState({ data, errors })
+  }
+
+  handleSubmit = async () => {
+    // console.log('this.state.data is', this.state.data)
+    const cityId = this.props.match.params.id
+    try {
+      await addComment(this.state.data, cityId)
+    } catch (err) {
+      console.log('error', err)
+      this.setState({ errors: err.response.data.errors })
+    }
+  }
+
   render() {
     console.log('State from backend:', this.state.city)
-    // console.log(this.state.favorited)
+    
     if (!this.state.city) return null
+    console.log('Comments are:', this.state.city.comments)
+    // console.log(this.state.city.favoritedUsers)
+    // console.log('user_id from token is:', getPayload().sub)
+    // console.log('State from backend:', this.state.data)
     return (
 
       <section className="section">
@@ -80,13 +86,15 @@ class cityCard extends React.Component {
               <div className="titleRow">
                 <p className="title">{this.state.city.name}</p>
                 <div className="favWishIcons">
-                  <div className="favContainer">
-                    <svg onClick={this.handleToggle} className={!this.state.favorited ? "ico" : "ico liked"} width="24" height="24" viewBox="0 0 24 24">
-                      <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path>
+                  <div className="wishContainer">
+                    <svg onClick={this.handleToggle} className={!this.state.city.wishlistedUsers.includes(getPayload().sub) ? "ico" : "ico wished"} id="wish" width="34" height="34" viewBox="0 0 24 24">
+                      <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" id="wish"></path>
                     </svg>
-                    {/* <svg onClick={this.handleToggle} className={!this.state.favorited ? "ico" : "ico liked"} width="24" height="24" viewBox="0 0 24 24">
-                      <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path>
-                    </svg> */}
+                  </div>
+                  <div className="favContainer">
+                    <svg onClick={this.handleToggle} className={!this.state.city.favoritedUsers.includes(getPayload().sub) ? "ico" : "ico liked"} id="favorite" width="34" height="34" viewBox="0 0 24 24">
+                      <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" id="favorite"></path>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -117,10 +125,84 @@ class cityCard extends React.Component {
                 </Marker>
               </MapGL>  
               <h1 className="title is-4">Comment and Review</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-              <p>
-              Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.
-              </p>
+              {this.state.city.comments.map(comment => {
+                return (comment.user.includes(getPayload().sub) ? 
+                    <div key={comment._id} className="comments">
+                      <div className="commentBox">
+                        <div className="commentText">
+                          {comment.text}
+                          <br></br>
+                        </div>
+                        <div className="commentDetails">
+                          Comment created: {comment.createdAt.slice(0, 10)}
+                          <br></br>
+                          By user id: {comment.user}
+                        </div>
+                        
+                      </div>
+                      {/* <p className="commentCreator">
+                        user: {comment._id}, created: {comment.createdAt.slice(0, 10)}
+                      </p> */}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
+                    </div>
+                    :
+                    <div key={comment._id} className="comments">
+                      <div className="commentBox">
+                        <div className="commentText">
+                          {comment.text}
+                          <br></br>
+                        </div>
+                        <div className="commentDetails">
+                          Comment created: {comment.createdAt.slice(0, 10)}
+                          <br></br>
+                          By user id: {comment.user}
+                        </div>
+                        
+                      </div>
+                      {/* <p className="commentCreator">
+                        user: {comment._id}, created: {comment.createdAt.slice(0, 10)}
+                      </p> */}
+                    </div>
+                  )
+                })}
+{/*                 
+                
+                )
+                return (
+                  
+                  <div key={comment._id} className="comments">
+                    <div className="commentBox">
+                      <div className="commentText">
+                        {comment.text}
+                        <br></br>
+                      </div>
+                      <div className="commentDetails">
+                        Comment created: {comment.createdAt.slice(0, 10)}
+                        <br></br>
+                        By user id: {comment._id}
+                      </div>
+                      
+                    </div>
+
+                  </div>
+                )
+              })} */}
+              <form className="addComment">
+                <input
+                  className="textarea"
+                  name="text"
+                  value={this.state.data.text}
+                  onChange={this.handleChange}
+                />
+                <button type="submit" 
+                  className="button is-fullwidth is-danger"
+                  onClick={this.handleSubmit}
+                >Submit</button>
+              </form>
+              <div className="addComment">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
+              </div>
+              
             </div>
           </div>
           <div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment } from '../lib/api.js'
+import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment, deleteCity } from '../lib/api.js'
 import { getPayload } from '../lib/auth'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -28,10 +28,20 @@ class cityCard extends React.Component {
     }
   }
 
-  handleEdit = () => {
+  handleEditCity = () => {
     try {
       const cityId = this.props.match.params.id
       this.props.history.push(`/cities/${cityId}/edit`)
+    } catch (err) {
+      console.log(err)
+    } 
+  }
+
+  handleDeleteCity = async () => {
+    try {
+      const cityId = this.props.match.params.id
+      await deleteCity(cityId)
+      this.props.history.push('/profile')
     } catch (err) {
       console.log(err)
     } 
@@ -68,11 +78,14 @@ class cityCard extends React.Component {
     this.setState({ data, errors })
   }
 
-  handleSubmit = async () => {
+  handleAddComment = async (event) => {
     // console.log('this.state.data is', this.state.data)
+    event.preventDefault()
     const cityId = this.props.match.params.id
     try {
       await addComment(this.state.data, cityId)
+      const city = await getSingleCity(cityId)
+      this.setState( { city: city.data } )
     } catch (err) {
       console.log('error', err)
       this.setState({ errors: err.response.data.errors })
@@ -110,7 +123,10 @@ class cityCard extends React.Component {
                 <div className="titleAndEdit">
                   <p className="title">{this.state.city.name}</p>
                   {this.state.city.user._id === getPayload().sub && 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onClick={this.handleEdit} className="editIcon"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onClick={this.handleEditCity} className="editIcon"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>
+                  }
+                  {this.state.city.user._id === getPayload().sub && 
+                  <svg width="28" height="24" xmlns="http://www.w3.org/2000/svg" onClick={this.handleDeleteCity} className="deleteIcon"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.094l-4.157-4.104 4.1-4.141-1.849-1.849-4.105 4.159-4.156-4.102-1.833 1.834 4.161 4.12-4.104 4.157 1.834 1.832 4.118-4.159 4.143 4.102 1.848-1.849z"/></svg>
                   }
                 </div>
                 <div className="favWishIcons">
@@ -197,7 +213,7 @@ class cityCard extends React.Component {
                 />
                 <button type="submit" 
                   className="button is-fullwidth is-danger"
-                  onClick={this.handleSubmit}
+                  onClick={this.handleAddComment}
                 >Submit</button>
               </form>
             </div>

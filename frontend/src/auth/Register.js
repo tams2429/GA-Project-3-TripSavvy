@@ -7,7 +7,9 @@ class Register extends React.Component {
       username: '',
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      profilePicture: '',
+      about: ''
     },
     errors: {}
   }
@@ -62,6 +64,36 @@ class Register extends React.Component {
                 </div>
                 {this.state.errors.email && <small className="help is-danger">{this.state.errors.email}</small>}
               </div>
+
+              <div className="field">
+                <label className="label">Profile Picture</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    placeholder="http://"
+                    name="profilePicture"
+                    value={this.state.formData.profilePicture}
+                    onChange={this.handleChange}
+                  />
+                  <span></span>
+                </div>
+              </div>
+
+
+              <div className="field">
+                <label className="label">Bio</label>
+                <div className="control">
+                  <input
+                    className="textarea"
+                    name="about"
+                    value={this.state.formData.about}
+                    onChange={this.handleChange}
+                  />
+                  <span></span>
+                </div>
+              </div>
+
+
               <div className="field">
                 <label className="label">Password</label>
                 <div className="control">

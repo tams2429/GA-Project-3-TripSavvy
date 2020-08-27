@@ -1,7 +1,7 @@
 import React from 'react'
 import { editCity, getSingleCity  } from '../lib/api'
 import CityForm from './CityForm'
-// import ImageUploader from 'react-images-upload'
+
 
 class EditCity extends React.Component {
   state = {
@@ -61,7 +61,6 @@ class EditCity extends React.Component {
   handleSubmit = async event => {
 
     event.preventDefault()
-    console.log('clicked')
     const cityId = this.props.match.params.id
     try {
       await editCity(cityId, this.state.data)

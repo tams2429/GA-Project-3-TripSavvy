@@ -1,6 +1,7 @@
 import React from 'react'
 import { register } from '../lib/api'
-import { popupSuccess, popupWarning, popupError } from '../lib/notification'
+import { popupSuccess, popupError } from '../lib/notification'
+import ImageUpload from '../lib/ImageUpload'
 
 class Register extends React.Component {
   state = {
@@ -34,6 +35,11 @@ class Register extends React.Component {
       popupError('Something has gone horribly wrong...')
       this.setState({ errors: err.response.data.errors })
     }
+  }
+
+  handleImageChange = url => {
+    const data = { ...this.state.data, profilePicture: url }
+    this.setState({ data })
   }
 
   handlePasswordVisibility = () => {
@@ -77,12 +83,9 @@ class Register extends React.Component {
               <div className="field">
                 <label className="label">Profile Picture</label>
                 <div className="control">
-                  <input
-                    className="input"
-                    placeholder="http://"
-                    name="profilePicture"
-                    value={this.state.formData.profilePicture}
-                    onChange={this.handleChange}
+                  <ImageUpload
+                    labelText="Profile Picture"
+                    onChange={this.handleImageChange}
                   />
                   <span></span>
                 </div>

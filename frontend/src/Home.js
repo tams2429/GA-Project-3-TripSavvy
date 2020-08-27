@@ -2,15 +2,21 @@ import React from 'react'
 
 import { getAllCities } from './lib/api'
 
+
 class Home extends React.Component {
 
   state = {
     categories: [],
     allCities: [],
     possibleCityOptions: [],
-    selectedCity: true
+    selectedCity: true,
+    night: false,
+    food: false,
+    culture: false,
+    beach: false,
+    snow: false,
+    nature: false
   }
-
   async componentDidMount() {
     try {
       const allCities = await getAllCities()
@@ -22,8 +28,6 @@ class Home extends React.Component {
   }
 
   handleSelected = (event) => {
-    console.log(event.target.id)
-    console.log(this.state.categories)
     if (!this.state.categories.includes(event.target.id)){
       const addedCategoryArray = [...this.state.categories, event.target.id]
       console.log(addedCategoryArray)
@@ -66,12 +70,12 @@ class Home extends React.Component {
     }
   }
 
+
   handleReset = () => {
     this.setState({ categories: [], possibleCityOptions: [], selectedCity: true })
   }
 
   isSelected = (id) => {
-    console.log('running')
     const selectedCategoryArray = this.state.categories
     if (selectedCategoryArray.some(category => {
       return category === id
@@ -80,64 +84,95 @@ class Home extends React.Component {
     }
   }
 
+  mouseEnter = event => { 
+    if (event.target.id === 'night') {
+      this.setState({ night: true })
+    } else if (event.target.id === 'food') {
+      this.setState({ food: true })
+    } else if (event.target.id === 'culture') {
+      this.setState({ culture: true })
+    } else if (event.target.id === 'beach') {
+      this.setState({ beach: true }) 
+    } else if (event.target.id === 'snow') {
+      this.setState({ snow: true }) 
+    } else if (event.target.id === 'nature') {
+      this.setState({ nature: true })
+    }
+  }
+
+  mouseLeave = event => {
+    if (event.target.id === 'night') {
+      this.setState({ night: false })
+    } else if (event.target.id === 'food') {
+      this.setState({ food: false })
+    } else if (event.target.id === 'culture') {
+      this.setState({ culture: false })
+    } else if (event.target.id === 'beach') {
+      this.setState({ beach: false }) 
+    } else if (event.target.id === 'snow') {
+      this.setState({ snow: false }) 
+    } else if (event.target.id === 'nature') {
+      this.setState({ nature: false })
+    }
+  }
 
   render() {
     return (
       <section className="section home">
         <div className="container">
           <div className="columns home-row1">
-            <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} id="night">
+            <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="night">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="night">NightLife</h2>
+                    <h2 className={this.state.night ?  'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="night">NightLife</h2>
                   </div>
                 </div>
               </section>
             </div>
-            <div className={this.isSelected('food') ? 'selected column food addMargin' : 'column food addMargin'} onClick={this.handleSelected} id="food">
+            <div className={this.isSelected('food') ? 'selected column food addMargin' : 'column food addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="food">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="food">Food</h2>
+                    <h2 className={this.state.food ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="food">Food</h2>
                   </div>
                 </div>
               </section>
             </div>
-            <div className={this.isSelected('culture') ? 'selected column culture addMargin' : 'column culture addMargin'} onClick={this.handleSelected} id="culture">
+            <div className={this.isSelected('culture') ? 'selected column culture addMargin' : 'column culture addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="culture">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="culture">Culture</h2>
+                    <h2 className={this.state.culture ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="culture">Culture</h2>
                   </div>
                 </div>
               </section>
             </div>
           </div>
           <div className="columns home-row2">
-            <div className={this.isSelected('beach') ? 'selected column beach addMargin' : 'column beach addMargin'} onClick={this.handleSelected} id="beach">
+            <div className={this.isSelected('beach') ? 'selected column beach addMargin' : 'column beach addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="beach">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="beach">Beach</h2>
+                    <h2 className={this.state.beach ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="beach">Beach</h2>
                   </div>
                 </div>
               </section>
             </div>
-            <div className={this.isSelected('snow') ? 'selected column snow addMargin' : 'column snow addMargin'} onClick={this.handleSelected} id="snow">
+            <div className={this.isSelected('snow') ? 'selected column snow addMargin' : 'column snow addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="snow">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="snow">Snow</h2>
+                    <h2 className={this.state.snow ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="snow">Snow</h2>
                   </div>
                 </div>
               </section>
             </div>
-            <div className={this.isSelected('nature') ? 'selected column nature addMargin' : 'column nature addMargin'} onClick={this.handleSelected} id="nature">
+            <div className={this.isSelected('nature') ? 'selected column nature addMargin' : 'column nature addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="nature">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
-                    <h2 className="subtitle hvr-skew-forward" id="nature">Nature</h2>
+                    <h2 className={this.state.nature ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="nature">Nature</h2>
                   </div>
                 </div>
               </section>
@@ -147,7 +182,7 @@ class Home extends React.Component {
             this.state.selectedCity ?
               <>
                 <div className="columns home-row3 is-centered">
-                  <button className="button is-danger is-rounded addMargin" onClick={this.handleClick}>Take me to a trip!</button>
+                  <button className="button trip-button is-rounded addMargin hvr-shrink" onClick={this.handleClick}>FIND A TRIP</button>
                 </div>
               </>
               :
@@ -156,7 +191,7 @@ class Home extends React.Component {
                   <h1 className="title">Whoops! No city found with these specifications 😢</h1>
                 </div>
                 <div className="columns home-row4 is-centered addMargin">
-                  <button className="button is-danger is-rounded" onClick={this.handleReset}>Try again</button>
+                  <button className="button is-rounded trip-button" onClick={this.handleReset}>Try again</button>
                 </div>
               </>
           }

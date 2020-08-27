@@ -30,6 +30,13 @@ class Profile extends React.Component {
     return this.state.user._id === getPayload().sub
   }
 
+  handleEditProfile = () => {
+    this.props.history.push('/profile/edit')
+  }
+
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
 
   render() {
     if (!this.state.user) return null
@@ -42,8 +49,10 @@ class Profile extends React.Component {
             <figure className="image is-150x150">
               <img className="is-rounded" src={this.state.user.profilePicture} />
             </figure>
-            <h1 className="profile-name">{this.state.user.username}</h1>  
-            <p>{this.state.user.about}</p>     
+            <h1 className="profile-name">{this.capitalizeFirstLetter(this.state.user.username)} </h1> 
+            <p>{this.capitalizeFirstLetter(this.state.user.about)}</p>
+            <br></br>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onClick={this.handleEditProfile} className="editIcon"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>     
           </div>       
           <div className="columns">
 
@@ -54,7 +63,7 @@ class Profile extends React.Component {
               <p className="title is-4">Wishlist:</p>
               {this.state.user.wishlistedCities.map((city) =>
                 <Link key={city.name} to={`/cities/${city._id}`}>
-                  <li >{city.name}</li>
+                  <li >{this.capitalizeFirstLetter(city.name)}</li>
                 </Link>
               )}
             </div> 
@@ -63,7 +72,7 @@ class Profile extends React.Component {
               <p className="title is-4">Favourites:</p>
               {this.state.user.favoritedCities.map((city) =>
                 <Link key={city.name} to={`/cities/${city._id}`}>
-                  <li >{city.name}</li>
+                  <li >{this.capitalizeFirstLetter(city.name)}</li>
                 </Link>
               )}
             </div>
@@ -73,9 +82,9 @@ class Profile extends React.Component {
 
               {this.state.allCities.map(city => { 
                 return (
-                  (this.state.user._id === getPayload().sub) ?
+                  (city.user._id === getPayload().sub) ?
                     <Link key={city._id} to={`/cities/${city._id}`}>
-                      <li >{city.name}</li>
+                      <li>{this.capitalizeFirstLetter(city.name)}</li>
                     </Link>
                     :
                     <>

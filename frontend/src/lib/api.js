@@ -56,6 +56,10 @@ export const getProfile = () => {
   return axios.get('/api/profile', withHeaders())
 }
 
+export const editProfile = (formData) => {
+  return axios.put('/api/profile', formData,  withHeaders())
+}
+
 //* Create a City Page Request
 export const createCity = formData => {
   return axios.post('/api/cities', formData, withHeaders())

@@ -35,6 +35,7 @@ router.route('/login')
   .post(auth.login)
 
 router.route('/profile') // ? Route for a profile
-  .get(secureRoute, users.profile) // ? uses GET and MUST be  secureRoute, if its not, you would not know who you are supposed to be fetching the profile for.
+  .get(secureRoute, users.profile) 
+  .put(secureRoute, users.profileEdit)
 
 module.exports = router

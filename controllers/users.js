@@ -16,9 +16,21 @@ async function userProfile(req, res, next) {
   }
 }
 
+async function profileEdit(req, res, next) {
+  try {
+    const userToBeEdited = await User.findById(req.currentUser._id)
+    console.log(userToBeEdited)
+    Object.assign(userToBeEdited, req.body) 
+    await userToBeEdited.save() 
+    res.status(202).json(userToBeEdited) 
+  } catch (err) {
+    next(err)
+  }
+}
 
 // If I wanted to allow other users to view profiles, I would set this up more like a show route controllers, with a url like "users/:id"
 
 module.exports = {
-  profile: userProfile
+  profile: userProfile,
+  profileEdit: profileEdit
 }

@@ -43,7 +43,10 @@ class CreateCity extends React.Component {
     this.setState({ data })
   }
 
-
+  handleImageChange = url => {
+    const data = { ...this.state.data, cityImg: url }
+    this.setState({ data })
+  }
 
   handleLatLng = selected => {
     const selectedCategories = selected ? selected.map(category => parseFloat(category.value)) : []
@@ -78,6 +81,7 @@ class CreateCity extends React.Component {
               handleSubmit={this.handleSubmit}
               data={this.state.data}
               options={this.options}
+              handleImageChange={this.handleImageChange}
             />
           </div>
         </div>

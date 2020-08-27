@@ -27,7 +27,7 @@ export const getSingleCity = (id) => {
   return axios.get(`/api/cities/${id}`)
 }
 
-export const editCity = (formData, id) => {
+export const editCity = (id, formData) => {
   return axios.put(`/api/cities/${id}`, formData, withHeaders())
 }
 

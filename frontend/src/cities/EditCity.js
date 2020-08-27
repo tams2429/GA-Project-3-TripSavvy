@@ -1,13 +1,10 @@
 import React from 'react'
-import { createCity } from '../lib/api'
+import { editCity, getSingleCity  } from '../lib/api'
 import CityForm from './CityForm'
+// import ImageUploader from 'react-images-upload'
 
-
-
-
-class CreateCity extends React.Component {
+class EditCity extends React.Component {
   state = {
-
     data: {
       name: '',
       country: '',
@@ -15,11 +12,9 @@ class CreateCity extends React.Component {
       cityLatLng: [],
       cityImg: '',
       categories: []
-    },
-    errors: {}
+    }
   }
 
-  //for the react-select options
   options = [
     { value: 'beach', label: 'Beaches' },
     { value: 'night', label: 'Good Nightlife' },
@@ -27,9 +22,19 @@ class CreateCity extends React.Component {
     { value: 'snow', label: 'Snow' },
     { value: 'food', label: 'Food Scene' },
     { value: 'nature', label: 'Access to Nature' }
-  ]
+  ] 
 
-  //event handlers for submitting data to state
+
+  async componentDidMount() {
+    const cityId = this.props.match.params.id
+    try {
+      const city = await getSingleCity(cityId)
+      this.setState({ data: city.data })
+    } catch (err) {
+      console.log('err')
+    }
+  }
+
 
   handleChange = event => {
     const data = { ...this.state.data, [event.target.name]: event.target.value }
@@ -51,22 +56,24 @@ class CreateCity extends React.Component {
     this.setState({ data })
   }
 
+
+
   handleSubmit = async event => {
+
     event.preventDefault()
-    console.log(this.state.data)
-    // console.log(this.match.params.id)
+    console.log('clicked')
+    const cityId = this.props.match.params.id
     try {
-      const res = await createCity(this.state.data)
-      console.log(res)
-      this.props.history.push(`/cities/${res.data._id}`)
+      await editCity(cityId, this.state.data)
+      this.props.history.push(`/cities/${cityId}`)
     } catch (err) {
-      console.log('error', err)
-      this.setState({ errors: err.response.data.errors })
+      console.log('error')
     }
   }
 
 
   render() {
+    console.log(this.state.data)
     return (
       <section className="section">
         <div className="container">
@@ -79,6 +86,7 @@ class CreateCity extends React.Component {
               data={this.state.data}
               options={this.options}
             />
+       
           </div>
         </div>
       </section>
@@ -87,4 +95,4 @@ class CreateCity extends React.Component {
 
 }
 
-export default CreateCity
+export default EditCity

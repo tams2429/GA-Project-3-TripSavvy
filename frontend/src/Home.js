@@ -8,7 +8,7 @@ class Home extends React.Component {
     categories: [],
     allCities: [],
     possibleCityOptions: [],
-    selectedCity: []
+    selectedCity: true
   }
 
   async componentDidMount() {
@@ -53,12 +53,30 @@ class Home extends React.Component {
       })
       this.setState({ possibleCityOptions: selectedCities })
 
-      const selectedCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
-      this.setState({ selectedCity }) // for some reason this is not setting into state 
-      console.log(selectedCity)
+      const chosenCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
+      console.log(chosenCity)
       console.log(this.state)
+      if (chosenCity) {
+        this.props.history.push(`/cities/${chosenCity._id}`)
+      } else {
+        this.setState({ selectedCity: false })
+      }
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  handleReset = () => {
+    this.setState({ categories: [], possibleCityOptions: [], selectedCity: true })
+  }
+
+  isSelected = (id) => {
+    console.log('running')
+    const selectedCategoryArray = this.state.categories
+    if (selectedCategoryArray.some(category => {
+      return category === id
+    })) {
+      return true
     }
   }
 
@@ -68,7 +86,7 @@ class Home extends React.Component {
       <section className="section">
         <div className="container ">
           <div className="columns home-row1">
-            <div className={this.state.hasNightLife ? 'column night isSelected' : 'column night'} onClick={this.handleSelected} id="night">
+            <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} id="night">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -77,7 +95,7 @@ class Home extends React.Component {
                 </div>
               </section>
             </div>
-            <div className={this.state.hasFoodScene ? 'column food isSelected' : 'column food'} onClick={this.handleSelected} id="food">
+            <div className={this.isSelected('food') ? 'selected column food addMargin' : 'column food addMargin'} onClick={this.handleSelected} id="food">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -86,7 +104,7 @@ class Home extends React.Component {
                 </div>
               </section>
             </div>
-            <div className={this.state.hasCulture ? 'column culture isSelected' : 'column culture'} onClick={this.handleSelected} id="culture">
+            <div className={this.isSelected('culture') ? 'selected column culture addMargin' : 'column culture addMargin'} onClick={this.handleSelected} id="culture">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -97,7 +115,7 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="columns home-row2">
-            <div className={this.state.hasBeach ? 'column beach isSelected' : 'column beach'} onClick={this.handleSelected} id="beach">
+            <div className={this.isSelected('beach') ? 'selected column beach addMargin' : 'column beach addMargin'} onClick={this.handleSelected} id="beach">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -106,7 +124,7 @@ class Home extends React.Component {
                 </div>
               </section>
             </div>
-            <div className={this.state.hasSnow ? 'column snow isSelected' : 'column snow'} onClick={this.handleSelected} id="snow">
+            <div className={this.isSelected('snow') ? 'selected column snow addMargin' : 'column snow addMargin'} onClick={this.handleSelected} id="snow">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -115,7 +133,7 @@ class Home extends React.Component {
                 </div>
               </section>
             </div>
-            <div className={this.state.hasNature ? 'column nature isSelected' : 'column nature'} onClick={this.handleSelected} id="nature">
+            <div className={this.isSelected('nature') ? 'selected column nature addMargin' : 'column nature addMargin'} onClick={this.handleSelected} id="nature">
               <section className="hero">
                 <div className="hero-body">
                   <div className="container">
@@ -125,11 +143,24 @@ class Home extends React.Component {
               </section>
             </div>
           </div>
-          <div className="columns home-row3">
-            <button className="button is-danger is-rounded" onClick={this.handleClick}>Take me to a trip</button>
-          </div>
+          {
+            this.state.selectedCity ?
+              <>
+                <div className="columns home-row3 is-centered">
+                  <button className="button is-danger is-rounded addMargin" onClick={this.handleClick}>Take me to a trip!</button>
+                </div>
+              </>
+              :
+              <>
+                <div className="columns home-row3 is-centered addMargin">
+                  <h1 className="title">Whoops! No city found with these specifications 😢</h1>
+                </div>
+                <div className="columns home-row4 is-centered addMargin">
+                  <button className="button is-danger is-rounded" onClick={this.handleReset}>Try again</button>
+                </div>
+              </>
+          }
         </div>
-        
       </section>
     )
   }

@@ -47,6 +47,20 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
       </div>
 
       <div className="field">
+        <label className="label">Image Url:</label>
+        <div className="control">
+          <input
+            className="input"
+            name="cityImg"
+            value={data.cityImg}
+            onChange={handleChange}
+          />
+          <span></span>
+        </div>
+      </div>
+
+
+      <div className="field">
         <label className="label">Enter Latitude then Longitude</label>
         <CreatableSelect
           isMulti

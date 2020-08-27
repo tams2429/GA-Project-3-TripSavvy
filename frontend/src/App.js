@@ -8,16 +8,17 @@ import Profile from './users/Profile'
 import Register from './auth/Register'
 import Login from './auth/Login'
 import CreateCity from './cities/CreateCity'
+import EditCity from './cities/EditCity'
 
 const App = () => (
 
-  <BrowserRouter>
-    
+  <BrowserRouter>   
     <main>
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/cities/:id" component={cityCard} />
+        <Route path="/cities/:id/edit" component={EditCity} />
+        <Route path="/cities/:id" component={cityCard} />     
         <Route path="/profile" component={Profile} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />

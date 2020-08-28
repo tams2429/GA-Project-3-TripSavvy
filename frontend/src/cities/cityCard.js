@@ -7,7 +7,7 @@ import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 
-class cityCard extends React.Component {
+class CityCard extends React.Component {
 
   state = {
     city: null,
@@ -18,13 +18,11 @@ class cityCard extends React.Component {
     errors: {}
   }
 
-
   async componentDidMount() {
     const cityId = this.props.match.params.id
     try {
       const city = await getSingleCity(cityId)
       this.setState({ city: city.data })
-
       const cityName = city.data.name
       const weather = await getWeather(cityName)
       this.setState( { weather: weather.data } )
@@ -56,12 +54,8 @@ class cityCard extends React.Component {
     } 
   }
 
-
-
-
   handleToggle = async (event) => {
     const cityId = this.props.match.params.id
-    console.log(event.target.id)
     if (event.target.id === 'wish') {
       try {
         await wishListToggle(cityId)
@@ -126,10 +120,8 @@ class cityCard extends React.Component {
   render() {
     if (!this.state.city) return null
     return (
-
       <section className="section">
         <div className="container">
-
           <div className="columns is-multiline box city-card">
             <div className="column is-half">
               <div className="titleRow">
@@ -155,7 +147,6 @@ class cityCard extends React.Component {
                   </div>
                 </div>
               </div>
-              
               <figure className="image">
                 <img className="city-img"src={this.state.city.cityImg}></img>
               </figure>
@@ -172,9 +163,7 @@ class cityCard extends React.Component {
                     </figure>
                   </div>
                 }
-                
               </div>
-
               <MapGL
                 mapStyle='mapbox://styles/dnirns/cke9os3u24drt19p3ye2yzqpe'
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
@@ -222,7 +211,6 @@ class cityCard extends React.Component {
                         <br></br>
                         By user id: {comment.user}
                       </div>
-                      
                     </div>
                   </div>
                 )
@@ -243,13 +231,11 @@ class cityCard extends React.Component {
             </div>
           </div>
           <div>
-
           </div>
-
         </div>
       </section>
     )
   }
 }
 
-export default cityCard
+export default CityCard

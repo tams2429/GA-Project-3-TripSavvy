@@ -15,15 +15,12 @@ import Splash from './common/Splash'
 import ErrorPage from './common/ErrorPage'
 
 const App = () => (
-   
   <BrowserRouter>   
-    
     <main>
       <Navbar />
       <Notifications />          
       <Switch>
         <Route exact path="/" component={Splash} />
-        
         <Route path="/cities/:id/edit" component={EditCity} />
         <Route path="/cities/:id" component={CityCard} />   
         <Route path="/profile/edit" component={EditProfile} />  
@@ -35,9 +32,7 @@ const App = () => (
         <Route path="/*" component={ErrorPage} />       
       </Switch>
     </main> 
-
   </BrowserRouter>
-
 )
 
 export default App

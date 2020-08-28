@@ -4,7 +4,7 @@ import Notifications from 'react-notify-toast'
 
 import Home from './Home'
 import Navbar from './common/NavBar'
-import cityCard from './cities/cityCard'
+import CityCard from './cities/CityCard'
 import Profile from './users/Profile'
 import EditProfile from './auth/EditProfile'
 import Register from './auth/Register'
@@ -15,17 +15,14 @@ import Splash from './common/Splash'
 import ErrorPage from './common/ErrorPage'
 
 const App = () => (
-   
   <BrowserRouter>   
-    
     <main>
       <Navbar />
       <Notifications />          
       <Switch>
         <Route exact path="/" component={Splash} />
-        
         <Route path="/cities/:id/edit" component={EditCity} />
-        <Route path="/cities/:id" component={cityCard} />   
+        <Route path="/cities/:id" component={CityCard} />   
         <Route path="/profile/edit" component={EditProfile} />  
         <Route path="/profile" component={Profile} />
         <Route path="/register" component={Register} />
@@ -35,9 +32,7 @@ const App = () => (
         <Route path="/*" component={ErrorPage} />       
       </Switch>
     </main> 
-
   </BrowserRouter>
-
 )
 
 export default App

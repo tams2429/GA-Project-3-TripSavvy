@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { getAllCities } from './lib/api'
+import { popupSuccess, popupError } from './lib/notification'
 
 
 class Home extends React.Component {
@@ -17,11 +18,11 @@ class Home extends React.Component {
     snow: false,
     nature: false
   }
+
   async componentDidMount() {
     try {
       const allCities = await getAllCities()
       this.setState( { allCities: allCities.data } )
-      console.log(this.state.allCities)
     } catch (err) {
       console.log(err)
     }
@@ -30,25 +31,21 @@ class Home extends React.Component {
   handleSelected = (event) => {
     if (!this.state.categories.includes(event.target.id)){
       const addedCategoryArray = [...this.state.categories, event.target.id]
-      console.log(addedCategoryArray)
       this.setState({ categories: addedCategoryArray })
     } else {
       const selectedCategories = [ ...this.state.categories]
       const removedCategoryArray = selectedCategories.filter( attribute => {
         return attribute !== event.target.id
       })
-      console.log(removedCategoryArray)
       this.setState({ categories: removedCategoryArray })
     }
   }
-
 
   handleClick = () => {
     try {
       const allCitiesArray = this.state.allCities
       const selectedCategories = this.state.categories
       const selectedCities = this.state.possibleCityOptions
-
       allCitiesArray.forEach( city => {
         const cityCategoryArray = city.categories
         if (selectedCategories.every(category => cityCategoryArray.includes(category))) {
@@ -56,20 +53,18 @@ class Home extends React.Component {
         } 
       })
       this.setState({ possibleCityOptions: selectedCities })
-
       const chosenCity = selectedCities[Math.floor(Math.random() * selectedCities.length)]
-      console.log(chosenCity)
-      console.log(this.state)
       if (chosenCity) {
+        popupSuccess('Your next dream holiday is being processed...')
         this.props.history.push(`/cities/${chosenCity._id}`)
       } else {
+        popupError('Looks like someone is being too picky...')
         this.setState({ selectedCity: false })
       }
     } catch (err) {
       console.log(err)
     }
   }
-
 
   handleReset = () => {
     this.setState({ categories: [], possibleCityOptions: [], selectedCity: true })
@@ -121,9 +116,7 @@ class Home extends React.Component {
       <section className="section home">
         <div className="container">
           <div className="columns home-row1">
-
             <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="night">
-  
               <section className="hero">
                 <div className="hero-body">
                   <div className="container ">
@@ -132,8 +125,6 @@ class Home extends React.Component {
                 </div>
               </section>
             </div>
-    
-        
             <div className={this.isSelected('food') ? 'selected column food addMargin' : 'column food addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="food">
               <section className="hero">
                 <div className="hero-body">

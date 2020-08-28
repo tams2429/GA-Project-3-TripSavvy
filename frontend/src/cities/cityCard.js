@@ -1,30 +1,34 @@
 import React from 'react'
 
-import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment, deleteCity } from '../lib/api.js'
+import { popupWishlist, popupFavorite, popupSuccess, popupError } from '../lib/notification'
+import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment, deleteCity, getWeather } from '../lib/api.js'
 import { getPayload } from '../lib/auth'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 
-class cityCard extends React.Component {
+class CityCard extends React.Component {
 
   state = {
     city: null,
+    weather: null,
     data: {
       text: ''
     },
     errors: {}
   }
 
-
   async componentDidMount() {
     const cityId = this.props.match.params.id
-    // console.log('state has user id', this.state.city.favoritedUsers.includes('5f4645c4369551235cc6b351'))
     try {
       const city = await getSingleCity(cityId)
       this.setState({ city: city.data })
+      const cityName = city.data.name
+      const weather = await getWeather(cityName)
+      this.setState( { weather: weather.data } )
     } catch (err) {
       console.log(err)
+      popupError('Oops looks like something is wrong with you or wrong with our code...')
     }
   }
 
@@ -34,6 +38,7 @@ class cityCard extends React.Component {
       this.props.history.push(`/cities/${cityId}/edit`)
     } catch (err) {
       console.log(err)
+      popupError('Oops looks like something is wrong with you or wrong with our code...')
     } 
   }
 
@@ -41,33 +46,35 @@ class cityCard extends React.Component {
     try {
       const cityId = this.props.match.params.id
       await deleteCity(cityId)
+      popupSuccess(`Successfully Deleted ${this.state.city.name}`)
       this.props.history.push('/profile')
     } catch (err) {
       console.log(err)
+      popupError('Oops looks like something is wrong with you or wrong with our code...')
     } 
   }
 
-
-
   handleToggle = async (event) => {
     const cityId = this.props.match.params.id
-    // console.log(cityId)
-    console.log(event.target.id)
     if (event.target.id === 'wish') {
       try {
         await wishListToggle(cityId)
         const city = await getSingleCity(cityId)
+        popupWishlist(` ${!this.state.city.wishlistedUsers.includes(getPayload().sub) ? `You have ⭐️ ${this.state.city.name}` : `You have 🙅‍♂⭐️🙅 ${this.state.city.name}` }`)
         this.setState( { city: city.data } )
       } catch (err) {
         console.log(err)
+        popupError('Oops looks like something is wrong with you or wrong with our code...')
       }
     } else {
       try {
         await favoriteToggle(cityId)
         const city = await getSingleCity(cityId)
+        popupFavorite(` ${!this.state.city.favoritedUsers.includes(getPayload().sub) ? `You have 💗 ${this.state.city.name}` : `You have 💔 ${this.state.city.name}` }`)
         this.setState( { city: city.data } )
       } catch (err) {
         console.log(err)
+        popupError('Oops looks like something is wrong with you or wrong with our code...')
       }
     }
   }
@@ -79,28 +86,30 @@ class cityCard extends React.Component {
   }
 
   handleAddComment = async (event) => {
-    // console.log('this.state.data is', this.state.data)
     event.preventDefault()
     const cityId = this.props.match.params.id
     try {
       await addComment(this.state.data, cityId)
+      popupSuccess('Added comment')
       const city = await getSingleCity(cityId)
       this.setState( { city: city.data } )
     } catch (err) {
       console.log('error', err)
+      popupError('Oops looks like something is wrong with you or wrong with our code...')
       this.setState({ errors: err.response.data.errors })
     }
   }
 
   handleDeleteComment = async (event) => {
     const cityId = this.props.match.params.id
-    // console.log(event.target.id)
     try {
       await deleteComment(cityId, event.target.id)
+      popupSuccess('Deleted comment')
       const city = await getSingleCity(cityId)
       this.setState( { city: city.data } )
     } catch (err) {
       console.log(err)
+      popupError('Oops looks like something is wrong with you or wrong with our code...')
     }
   }
 
@@ -109,19 +118,10 @@ class cityCard extends React.Component {
   }
 
   render() {
-    console.log('State from backend:', this.state.city)
-    
     if (!this.state.city) return null
-    console.log('Comments are:', this.state.city.comments)
-    // console.log(this.state.city.favoritedUsers)
-    // console.log('user_id from token is:', getPayload().sub)
-    // console.log('State from backend:', this.state.data)
-    // console.log('user id is', getPayload().sub)
     return (
-
       <section className="section">
         <div className="container">
-
           <div className="columns is-multiline box city-card">
             <div className="column is-half">
               <div className="titleRow">
@@ -147,16 +147,23 @@ class cityCard extends React.Component {
                   </div>
                 </div>
               </div>
-              
               <figure className="image">
                 <img className="city-img"src={this.state.city.cityImg}></img>
               </figure>
               <p>{this.capitalizeFirstLetter(this.state.city.description)}</p>
             </div>
-
             <div className="column is-half">
-              <p className="title">Map</p>  
-                
+              <div className="titleRow">
+                <p className="title">Map</p>
+                {!this.state.weather ? <></> :
+                  <div className="WeatherInfo">
+                    <p className="title">{Math.floor(this.state.weather.main.temp)}°C</p>
+                    <figure className="image weather">
+                      <img className="weather-img" src={`http://openweathermap.org/img/wn/${this.state.weather.weather[0].icon}@2x.png`} alt="Weather icon"></img>
+                    </figure>
+                  </div>
+                }
+              </div>
               <MapGL
                 mapStyle='mapbox://styles/dnirns/cke9os3u24drt19p3ye2yzqpe'
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
@@ -204,15 +211,15 @@ class cityCard extends React.Component {
                         <br></br>
                         By user id: {comment.user}
                       </div>
-                      
                     </div>
                   </div>
                 )
               })}
               <form className="addComment">
-                <input
+                <textarea
                   className="textarea"
                   name="text"
+                  maxLength="300"
                   value={this.state.data.text}
                   onChange={this.handleChange}
                 />
@@ -224,13 +231,11 @@ class cityCard extends React.Component {
             </div>
           </div>
           <div>
-
           </div>
-
         </div>
       </section>
     )
   }
 }
 
-export default cityCard
+export default CityCard

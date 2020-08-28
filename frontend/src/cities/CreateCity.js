@@ -20,7 +20,6 @@ class CreateCity extends React.Component {
     errors: {}
   }
 
-  //for the react-select options
   options = [
     { value: 'beach', label: 'Beaches' },
     { value: 'night', label: 'Good Nightlife' },
@@ -29,8 +28,6 @@ class CreateCity extends React.Component {
     { value: 'food', label: 'Food Scene' },
     { value: 'nature', label: 'Access to Nature' }
   ]
-
-  //event handlers for submitting data to state
 
   handleChange = event => {
     const data = { ...this.state.data, [event.target.name]: event.target.value }
@@ -57,24 +54,17 @@ class CreateCity extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    console.log(this.state.data)
-    // console.log(this.match.params.id)
     try {
       const res = await createCity(this.state.data)
-      console.log(res)
       this.props.history.push(`/cities/${res.data._id}`)
       popupSuccess('Create Successful')
     } catch (err) {
-      console.log('error', err)
       popupError('Looks like you are missing something...')
       this.setState({ errors: err.response.data.errors })
     }
   }
 
-
   render() {
-    console.log('errors:', this.state.errors)
-    console.log('data:', this.state.data)
     return (
       <section className="section">
         <div className="container">

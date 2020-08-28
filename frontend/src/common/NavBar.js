@@ -3,10 +3,9 @@ import { Link, withRouter } from 'react-router-dom'
 import { isAuthenticated, logout } from './../lib/auth'
 
 class NavBar extends React.Component {
-  //state for turning navbar items on or off
+
   state = { navbarOpen: false }
   
-  //minimise navbar items for responsive
   toggleNavbar = () => {
     this.setState({ navbarOpen: !this.state.navbarOpen })
   }
@@ -15,8 +14,6 @@ class NavBar extends React.Component {
     logout()
     this.props.history.push('/login')
   }
-
-
 
   render() {
     const isLoggedIn = isAuthenticated()
@@ -32,7 +29,6 @@ class NavBar extends React.Component {
             <>
             </>
           }
-
 
           <span className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''}`} onClick={this.toggleNavbar}>
             <span></span>

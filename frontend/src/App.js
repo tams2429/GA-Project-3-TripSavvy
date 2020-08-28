@@ -15,7 +15,7 @@ import Splash from './common/Splash'
 import ErrorPage from './common/ErrorPage'
 
 const App = () => (
-   
+  
   <BrowserRouter>   
     
     <main>

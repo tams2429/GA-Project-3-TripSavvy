@@ -183,7 +183,7 @@ class Home extends React.Component {
               :
               <>
                 <div className="columns home-row3 is-centered addMargin">
-                  <h1 className="title">Whoops! No city found with these specifications 😢</h1>
+                  <h1 className="title">Whoops! No city found with these specifications</h1>
                 </div>
                 <div className="columns home-row4 is-centered addMargin">
                   <button className="button is-rounded trip-button" onClick={this.handleReset}>Try again</button>

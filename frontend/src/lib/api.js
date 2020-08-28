@@ -7,8 +7,6 @@ const withHeaders = () => {
   }
 }
 
-const openweatherApiAccessToken = process.env.REACT_APP_OPENWEATHERMAP_ACCESS_TOKEN
-
 //* Login and Register Requests
 export const register = formData => {
   return axios.post('/api/register', formData)
@@ -17,7 +15,6 @@ export const register = formData => {
 export const login = formData => {
   return axios.post('/api/login', formData)
 }
-
 
 //* Home Page Requests
 export const getAllCities = () => {
@@ -53,10 +50,12 @@ export const deleteComment = (cityId, commentId) => {
   return axios.delete(`/api/cities/${cityId}/comments/${commentId}`, withHeaders())
 }
 
+//* weather app requests for cities
+const openweatherApiAccessToken = process.env.REACT_APP_OPENWEATHERMAP_ACCESS_TOKEN
+
 export const getWeather = (cityName) => {
   return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${openweatherApiAccessToken}`)
 }
-
 
 //* Profile Page Requests
 export const getProfile = () => {

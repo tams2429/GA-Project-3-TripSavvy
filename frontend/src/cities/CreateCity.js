@@ -3,9 +3,6 @@ import { createCity } from '../lib/api'
 import { popupSuccess, popupError } from '../lib/notification'
 import CityForm from './CityForm'
 
-
-
-
 class CreateCity extends React.Component {
   state = {
 

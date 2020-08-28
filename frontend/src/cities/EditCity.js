@@ -3,7 +3,6 @@ import { editCity, getSingleCity  } from '../lib/api'
 import { popupSuccess, popupError } from '../lib/notification'
 import CityForm from './CityForm'
 
-
 class EditCity extends React.Component {
   state = {
     data: {
@@ -25,7 +24,6 @@ class EditCity extends React.Component {
     { value: 'food', label: 'Food Scene' },
     { value: 'nature', label: 'Access to Nature' }
   ] 
-
 
   async componentDidMount() {
     const cityId = this.props.match.params.id
@@ -61,7 +59,6 @@ class EditCity extends React.Component {
   }
 
   handleSubmit = async event => {
-
     event.preventDefault()
     const cityId = this.props.match.params.id
     try {

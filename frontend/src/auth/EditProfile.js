@@ -2,7 +2,6 @@ import React from 'react'
 import { editProfile, getProfile } from '../lib/api'
 import { popupSuccess } from '../lib/notification'
 import ImageUpload from '../lib/ImageUpload'
-import { getPayload } from '../lib/auth'
 
 class EditProfile extends React.Component {
   state = {

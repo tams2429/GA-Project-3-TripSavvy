@@ -2,18 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 
-
-
-
-
-
 class Splash extends React.Component {
-  
-
   render() {
- 
-
-
     return (
       <>
         <Helmet>
@@ -35,8 +25,6 @@ class Splash extends React.Component {
       </> 
     )
   }
-
 }
-
 
 export default Splash

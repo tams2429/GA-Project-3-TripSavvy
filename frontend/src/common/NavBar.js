@@ -22,7 +22,7 @@ class NavBar extends React.Component {
         <div className="navbar-brand">
 
 
-          <Link className="navbar-item" to=""><h1>FIND ME A CITY</h1></Link>
+          <Link className="navbar-item" to="/home"><h1>FIND ME A CITY</h1></Link>
           { isLoggedIn ?
             <Link className="navbar-item" to="/createcity"><h1>CREATE A CITY</h1></Link>
             :

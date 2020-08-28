@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { popupWishlist, popupFavorite, popupSuccess, popupError } from '../lib/notification'
-import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment, deleteCity, getWeather } from '../lib/api.js'
+import { getSingleCity, wishListToggle, favoriteToggle, addComment, deleteComment, deleteCity, getWeather, getInfo } from '../lib/api.js'
 import { getPayload } from '../lib/auth'
 import MapGL, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -12,6 +12,7 @@ class CityCard extends React.Component {
   state = {
     city: null,
     weather: null,
+    info: null,
     data: {
       text: ''
     },
@@ -25,7 +26,15 @@ class CityCard extends React.Component {
       this.setState({ city: city.data })
       const cityName = city.data.name
       const weather = await getWeather(cityName)
+      console.log(weather)
       this.setState( { weather: weather.data } )
+      const cityLatLng = city.data.cityLatLng
+      const info = await getInfo(cityLatLng[0], cityLatLng[1])
+      console.log('Currency:', info.data.results[0].annotations.currency.symbol)
+      console.log('Flag:', info.data.results[0].annotations.flag)
+      console.log('Drive on:', info.data.results[0].annotations.roadinfo.drive_on)
+      console.log('Speed in:', info.data.results[0].annotations.roadinfo.speed_in)
+      this.setState( { info: info.data } )
     } catch (err) {
       console.log(err)
       popupError('Oops looks like something is wrong with you or wrong with our code...')
@@ -60,7 +69,7 @@ class CityCard extends React.Component {
       try {
         await wishListToggle(cityId)
         const city = await getSingleCity(cityId)
-        popupWishlist(` ${!this.state.city.wishlistedUsers.includes(getPayload().sub) ? `You have ⭐️ ${this.state.city.name}` : `You have 🙅‍♂⭐️🙅 ${this.state.city.name}` }`)
+        popupWishlist(` ${!this.state.city.wishlistedUsers.includes(getPayload().sub) ? `You have wishlisted ${this.state.city.name}` : `You have unwishlisted ${this.state.city.name}` }`)
         this.setState( { city: city.data } )
       } catch (err) {
         console.log(err)
@@ -70,7 +79,7 @@ class CityCard extends React.Component {
       try {
         await favoriteToggle(cityId)
         const city = await getSingleCity(cityId)
-        popupFavorite(` ${!this.state.city.favoritedUsers.includes(getPayload().sub) ? `You have 💗 ${this.state.city.name}` : `You have 💔 ${this.state.city.name}` }`)
+        popupFavorite(` ${!this.state.city.favoritedUsers.includes(getPayload().sub) ? `You have favorited ${this.state.city.name}` : `You have unfavorited ${this.state.city.name}` }`)
         this.setState( { city: city.data } )
       } catch (err) {
         console.log(err)
@@ -148,8 +157,16 @@ class CityCard extends React.Component {
                 </div>
               </div>
               <figure className="image">
-                <img className="city-img"src={this.state.city.cityImg}></img>
+                <img className="city-img"src={this.state.city.cityImg} alt="Picture of city"></img>
               </figure>
+              {!this.state.info ? <></> :
+                <div className="title About">
+                  <h2>Currency: {this.state.info.results[0].annotations.currency.symbol}</h2>
+                  <h2>Flag: {this.state.info.results[0].annotations.flag}</h2>
+                  <h2>Drive on: {this.state.info.results[0].annotations.roadinfo.drive_on}</h2>
+                  <h2>Speed in: {this.state.info.results[0].annotations.roadinfo.speed_in}</h2>
+                </div>
+              }
               <p>{this.capitalizeFirstLetter(this.state.city.description)}</p>
             </div>
             <div className="column is-half">

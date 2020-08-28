@@ -12,7 +12,6 @@ class NavBar extends React.Component {
 
   handleLogout = () => {
     logout()
-    this.props.history.push('/login')
   }
 
   render() {
@@ -20,16 +19,20 @@ class NavBar extends React.Component {
     return (
       <nav className="navbar">     
         <div className="navbar-brand">
+<<<<<<< HEAD
 
 
           <Link className="navbar-item" to="/home"><h1>FIND ME A CITY</h1></Link>
+=======
+          <Link className="navbar-item logo nav-item hvr-shrink" to="">TRIPSAVVY</Link>
+          <Link className="navbar-item nav-link hvr-shrink" to="/home"><h1>FIND ME A CITY</h1></Link>
+>>>>>>> development
           { isLoggedIn ?
-            <Link className="navbar-item" to="/createcity"><h1>CREATE A CITY</h1></Link>
+            <Link className="navbar-item nav-link hvr-shrink" to="/createcity">CREATE A CITY</Link>
             :
             <>
             </>
           }
-
           <span className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''}`} onClick={this.toggleNavbar}>
             <span></span>
             <span></span>
@@ -41,19 +44,18 @@ class NavBar extends React.Component {
             {isLoggedIn ?
               <> 
                 <Link className="navbar-item"   to="/profile"><h1>PROFILE</ h1></Link>
-                <Link className="navbar-item"   onClick={this.handleLogout} >LOGOUT</Link>
+                <Link className="navbar-item"   to="/login" onClick={this.handleLogout} >LOGOUT</Link>
               </>
               :
               <>
-                <Link className="navbar-item"   to="/login"><h1>LOGIN</h1>
+                <Link className="navbar-item"   to="/login">LOGIN
                 </  Link>
-                <Link className="navbar-item"   to="/register"><h1>REGISTER</ h1>
+                <Link className="navbar-item"   to="/register">REGISTER
                 </Link>
               </>
             }
           </div>
         </div>
-
       </nav>
     )
 

@@ -1,6 +1,5 @@
 import { notify } from 'react-notify-toast'
 
-
 const popupStyles = { background: '#fbcb46', text: '#000' }
 const favoriteStyle = { background: '#ff595e', text: '#000' }
 const wishlistStyle = { background: '#ffca3a', text: '#000' }
@@ -24,7 +23,6 @@ export const popupFavorite = message => {
 export const popupWishlist = message => {
   notify.show(message, 'custom', 1000, wishlistStyle)
 }
-
 
 export const popupCustom = message => {
   notify.show(message, 'custom', 3000, popupStyles)

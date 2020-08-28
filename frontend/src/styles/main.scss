@@ -5,6 +5,8 @@
 
 //* Global Styles
 
+
+
 section {
   font-family: 'Roboto', sans-serif;
 }
@@ -49,6 +51,11 @@ section.section.home {
 
 }
 
+.none-found {
+  color: red;
+  font-size: 1rem;
+  font-weight: 400;
+}
 
 .night {
   display: flex;
@@ -167,7 +174,7 @@ section.section.home {
   color: purple;
 }
 .selected {
-  border: 2px solid #FF649C;
+  border: 3px solid #fe713bf5;
 
 }
 
@@ -177,7 +184,11 @@ section.section.home {
   border-color: transparent;
   color: #fff;
 }
-
+.form-button {
+  background-color: #fe713bf5;
+  border-color: transparent;
+  color: #fff;
+}
 .trip-button:hover {
   color: white;
   border-color: transparent;
@@ -189,13 +200,33 @@ section.section.home {
 
 
 //* Navbar styles
+.navbar-item.logo {
+  font-family: 'Faster One', cursive; 
+  font-size: 1.4rem;
+}
+
+.navbar-item.logo:hover {
+color: white;
+}
+
+.nav-link {
+  align-content: center;
+  font-size: 1rem;
+  padding: 0rem 1.5rem;
+}
+.navbar-item.nav-link:hover {
+  color: white;
+}
+
 
 .navbar {
   color: white;
   font-family: 'Roboto', sans-serif;
   background-color: #8ed6ffeb;
 }
-.navbar-item {
+a.navbar-item {
+  justify-content: flex-end;
+  display:flex;
   color: white;
 }
 .nav-dropdown {

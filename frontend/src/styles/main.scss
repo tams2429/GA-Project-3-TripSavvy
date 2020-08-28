@@ -205,15 +205,17 @@ section.section.home {
 .titleRow {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   .titleAndEdit {
     display: flex;
     .editIcon {
       margin: 10px;
+      margin-top: 20px;
       cursor: pointer;
     }
     .deleteIcon {
       margin: 10px;
+      margin-top: 20px;
       margin-left: 0;
       margin-right: 0;
       cursor: pointer;
@@ -261,6 +263,20 @@ section.section.home {
   fill: #232323;
   transition: .4s; 
 }
+
+.WeatherInfo {
+  display: flex;
+  .image.weather {
+    width: 60px;
+    border-radius: 50%;
+    background-color: black;
+    opacity: 0.7;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+
 
 .commentBox {
   background: lightblue;

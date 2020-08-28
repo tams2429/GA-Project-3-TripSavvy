@@ -37,7 +37,6 @@ class EditCity extends React.Component {
     }
   }
 
-
   handleChange = event => {
     const data = { ...this.state.data, [event.target.name]: event.target.value }
     const errors = { ...this.state.errors, [event.target.name]: '' }
@@ -50,15 +49,16 @@ class EditCity extends React.Component {
     this.setState({ data })
   }
 
-
+  handleImageChange = url => {
+    const data = { ...this.state.data, cityImg: url }
+    this.setState({ data })
+  }
 
   handleLatLng = selected => {
     const selectedCategories = selected ? selected.map(category => parseFloat(category.value)) : []
     const data = { ...this.state.data, cityLatLng: selectedCategories }    
     this.setState({ data })
   }
-
-
 
   handleSubmit = async event => {
 
@@ -69,12 +69,10 @@ class EditCity extends React.Component {
       this.props.history.push(`/cities/${cityId}`)
       popupSuccess('Edit Successful')
     } catch (err) {
-      console.log('error', err)
       popupError('You messed up...')
       this.setState({ errors: err.response.data.errors })
     }
   }
-
 
   render() {
     console.log(this.state.data)
@@ -89,6 +87,7 @@ class EditCity extends React.Component {
               handleSubmit={this.handleSubmit}
               data={this.state.data}
               options={this.options}
+              handleImageChange={this.handleImageChange}
               errors={this.state.errors}
             />
           </div>
@@ -96,7 +95,6 @@ class EditCity extends React.Component {
       </section>
     )
   }
-
 }
 
 export default EditCity

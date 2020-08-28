@@ -58,7 +58,6 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
         </div>
       </div>
 
-
       <div className="field">
         <label className="label">Enter Latitude then Longitude</label>
         <CreatableSelect
@@ -78,6 +77,7 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
           />
         </div>
       </div>
+      
       <div className="field">
         <button
           disabled={data.cityLatLng.length < 2 || data.categories.length === 0} 

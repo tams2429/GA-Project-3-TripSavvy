@@ -1,6 +1,6 @@
 import React from 'react'
 import { editProfile, getProfile } from '../lib/api'
-import { popupSuccess, popupError } from '../lib/notification'
+import { popupSuccess } from '../lib/notification'
 import ImageUpload from '../lib/ImageUpload'
 import { getPayload } from '../lib/auth'
 
@@ -38,23 +38,19 @@ class EditProfile extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    const userId = getPayload().sub
-    console.log(userId)
     try {
       const res = await editProfile( this.state.formData)
       popupSuccess(res.data.message)
       this.props.history.push('/profile')
-      console.log('updated')
     } catch (err) {
       console.log(err)
     }
   }
 
   handleImageChange = url => {
-    const data = { ...this.state.data, profilePicture: url }
-    this.setState({ data })
+    const formData = { ...this.state.formData, profilePicture: url }
+    this.setState({ formData })
   }
-
 
   render() {
     console.log(this.state.formData)
@@ -98,7 +94,6 @@ class EditProfile extends React.Component {
                   <span></span>
                 </div>
               </div>
-
 
               <div className="field">
                 <label className="label">Bio</label>

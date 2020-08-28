@@ -30,7 +30,6 @@ class Register extends React.Component {
       const res = await register(this.state.formData)
       popupSuccess(res.data.message)
       this.props.history.push('/login')
-      console.log('logged in')
     } catch (err) {
       popupError('Something has gone horribly wrong...')
       this.setState({ errors: err.response.data.errors })
@@ -38,8 +37,8 @@ class Register extends React.Component {
   }
 
   handleImageChange = url => {
-    const data = { ...this.state.data, profilePicture: url }
-    this.setState({ data })
+    const formData = { ...this.state.formData, profilePicture: url }
+    this.setState({ formData })
   }
 
   handlePasswordVisibility = () => {
@@ -91,7 +90,6 @@ class Register extends React.Component {
                 </div>
               </div>
 
-
               <div className="field">
                 <label className="label">Bio</label>
                 <div className="control">
@@ -105,7 +103,6 @@ class Register extends React.Component {
                   <span></span>
                 </div>
               </div>
-
 
               <div className="field">
                 <div className="passwordField">

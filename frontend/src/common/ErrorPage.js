@@ -12,8 +12,8 @@ const ErrorPage = () => (
       }</style>
     </Helmet>
     <section className="hero is-fullheight error-page">
-
       <div className="hero-body">
+    
         <div className="container">
           <p>Oops, something went wrong</p>
           <div className="container">
@@ -21,7 +21,7 @@ const ErrorPage = () => (
           </div>
         </div>
       </div>
-
+     
     </section>
   </>
 

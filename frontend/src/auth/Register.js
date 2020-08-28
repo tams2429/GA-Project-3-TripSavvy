@@ -38,8 +38,13 @@ class Register extends React.Component {
   }
 
   handleImageChange = url => {
-    const data = { ...this.state.data, profilePicture: url }
-    this.setState({ data })
+    console.log(url)
+    console.log(this.state.formData)
+    const formData = { ...this.state.formData, profilePicture: url }
+    console.log(formData)
+    this.setState({ formData }, () => {
+      console.log(this.state)
+    })
   }
 
   handlePasswordVisibility = () => {

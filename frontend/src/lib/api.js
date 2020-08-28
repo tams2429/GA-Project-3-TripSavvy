@@ -7,12 +7,9 @@ const withHeaders = () => {
   }
 }
 
-<<<<<<< HEAD
 const openweatherApiAccessToken = process.env.REACT_APP_OPENWEATHERMAP_ACCESS_TOKEN
 const openCageDataApiAccessToken = process.env.REACT_APP_OPENCAGEDATA_ACCESS_TOKEN
 
-=======
->>>>>>> development
 //* Login and Register Requests
 export const register = formData => {
   return axios.post('/api/register', formData)
@@ -57,20 +54,16 @@ export const deleteComment = (cityId, commentId) => {
 }
 
 //* weather app requests for cities
-const openweatherApiAccessToken = process.env.REACT_APP_OPENWEATHERMAP_ACCESS_TOKEN
 
 export const getWeather = (cityName) => {
   return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${openweatherApiAccessToken}`)
 }
 
-<<<<<<< HEAD
 export const getInfo = (cityLat, cityLng) => {
   return axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${cityLat},${cityLng}&key=${openCageDataApiAccessToken}`)
 }
 
 
-=======
->>>>>>> development
 //* Profile Page Requests
 export const getProfile = () => {
   return axios.get('/api/profile', withHeaders())

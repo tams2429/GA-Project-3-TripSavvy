@@ -19,14 +19,8 @@ class NavBar extends React.Component {
     return (
       <nav className="navbar">     
         <div className="navbar-brand">
-<<<<<<< HEAD
-
-
-          <Link className="navbar-item" to="/home"><h1>FIND ME A CITY</h1></Link>
-=======
           <Link className="navbar-item logo nav-item hvr-shrink" to="">TRIPSAVVY</Link>
           <Link className="navbar-item nav-link hvr-shrink" to="/home"><h1>FIND ME A CITY</h1></Link>
->>>>>>> development
           { isLoggedIn ?
             <Link className="navbar-item nav-link hvr-shrink" to="/createcity">CREATE A CITY</Link>
             :

@@ -71,22 +71,6 @@ class Profile extends React.Component {
               )}
             </div>
 
-            <div className="column profile-info"> 
-              <p className="title is-4">Created Cities:</p>
-
-              {this.state.allCities.map(city => { 
-                return (
-                  (city.user._id === getPayload().sub) ?
-                    <Link key={city._id} to={`/cities/${city._id}`}>
-                      <li>{this.capitalizeFirstLetter(city.name)}</li>
-                    </Link>
-                    :
-                    <>
-                    </>
-                )
-              })
-              }
-            </div>
 
             <div className="column is-half profile-info">
               <p className="title is-4">My Places</p>
@@ -122,6 +106,26 @@ class Profile extends React.Component {
               </MapGL> 
             </div>
           </div>
+          <div className="columns">
+            <div className="column profile-info"> 
+              <p className="title is-4">Created Cities:</p>
+              
+              {this.state.allCities.map(city => { 
+                return (
+                  (city.user._id === getPayload().sub) ?
+                    <Link key={city._id} to={`/cities/${city._id}`}>
+                      <span> {this.capitalizeFirstLetter(city.name)} </span>
+                    </Link>
+                    :
+                    <>
+                    </>
+                )
+              })
+              }
+              
+            </div>
+          </div>
+
         </div>
       </section>
     )

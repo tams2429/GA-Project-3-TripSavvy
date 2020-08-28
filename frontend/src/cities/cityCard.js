@@ -217,7 +217,7 @@ class cityCard extends React.Component {
                   onChange={this.handleChange}
                 />
                 <button type="submit" 
-                  className="button is-fullwidth is-danger"
+                  className="button is-fullwidth is-rounded trip-button hvr-shrink"
                   onClick={this.handleAddComment}
                 >Submit</button>
               </form>

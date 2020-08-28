@@ -21,7 +21,7 @@ class NavBar extends React.Component {
         <div className="navbar-brand">
           <Link className="navbar-item" to="/home"><h1>FIND ME A CITY</h1></Link>
           { isLoggedIn ?
-            <Link className="navbar-item" to="/createcity"><h1>CREATE A CITY</h1></Link>
+            <Link className="navbar-item nav-link hvr-shrink" to="/createcity">CREATE A CITY</Link>
             :
             <>
             </>
@@ -41,9 +41,9 @@ class NavBar extends React.Component {
               </>
               :
               <>
-                <Link className="navbar-item"   to="/login"><h1>LOGIN</h1>
+                <Link className="navbar-item"   to="/login">LOGIN
                 </  Link>
-                <Link className="navbar-item"   to="/register"><h1>REGISTER</ h1>
+                <Link className="navbar-item"   to="/register">REGISTER
                 </Link>
               </>
             }

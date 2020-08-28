@@ -82,7 +82,7 @@ const CityForm = ({ handleChange, handleSelectCategories, handleLatLng, handleSu
         <button
           disabled={data.cityLatLng.length < 2 || data.categories.length === 0} 
           type="submit" 
-          className="button is-fullwidth is-danger"
+          className="button is-fullwidth is-warning"
           onClick={handleSubmit}
         >Submit</button>
       </div>

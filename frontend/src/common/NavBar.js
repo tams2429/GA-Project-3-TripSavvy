@@ -45,7 +45,7 @@ class NavBar extends React.Component {
             {isLoggedIn ?
               <> 
                 <Link className="navbar-item"   to="/profile"><h1>PROFILE</ h1></Link>
-                <span className="navbar-item"   onClick={this.handleLogout} >LOGOUT</span>
+                <Link className="navbar-item"   onClick={this.handleLogout} >LOGOUT</Link>
               </>
               :
               <>

@@ -121,15 +121,19 @@ class Home extends React.Component {
       <section className="section home">
         <div className="container">
           <div className="columns home-row1">
+
             <div className={this.isSelected('night') ? 'selected column night addMargin' : 'column night addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="night">
+  
               <section className="hero">
                 <div className="hero-body">
-                  <div className="container">
-                    <h2 className={this.state.night ?  'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="night">NightLife</h2>
+                  <div className="container ">
+                    <h2 className={this.state.night ? 'subtitle skew-pre skew-post' : 'subtitle skew-pre'} id="night">NightLife</h2>
                   </div>
                 </div>
               </section>
             </div>
+    
+        
             <div className={this.isSelected('food') ? 'selected column food addMargin' : 'column food addMargin'} onClick={this.handleSelected} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} id="food">
               <section className="hero">
                 <div className="hero-body">

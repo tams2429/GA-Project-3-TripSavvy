@@ -81,7 +81,7 @@ class Login extends React.Component {
                 <button
                   // disabled={!this.state.formData.email || !this.state.formData.password}
                   type="submit"
-                  className="button is-fullwidth trip-button hvr-shrink">
+                  className="button is-fullwidth is-rounded trip-button hvr-shrink">
                       Login
                 </button>
               </div>

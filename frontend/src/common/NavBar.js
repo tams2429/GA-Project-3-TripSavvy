@@ -12,7 +12,6 @@ class NavBar extends React.Component {
 
   handleLogout = () => {
     logout()
-    this.props.history.push('/login')
   }
 
   render() {
@@ -21,10 +20,10 @@ class NavBar extends React.Component {
       <nav className="navbar">     
         <div className="navbar-brand">
 
-
-          <Link className="navbar-item" to=""><h1>FIND ME A CITY</h1></Link>
+          <Link className="navbar-item logo hvr-shrink" to ="">TRIPSAVVY</Link>
+          <Link className="navbar-item nav-link hvr-shrink" to="/Home">FIND ME A CITY</Link>
           { isLoggedIn ?
-            <Link className="navbar-item" to="/createcity"><h1>CREATE A CITY</h1></Link>
+            <Link className="navbar-item nav-link hvr-shrink" to="/createcity">CREATE A CITY</Link>
             :
             <>
             </>
@@ -40,14 +39,14 @@ class NavBar extends React.Component {
           <div className="navbar-end nav-dropdown">
             {isLoggedIn ?
               <> 
-                <Link className="navbar-item"   to="/profile"><h1>PROFILE</ h1></Link>
-                <Link className="navbar-item"   onClick={this.handleLogout} >LOGOUT</Link>
+                <Link className="navbar-item nav-link" to="/profile">PROFILE</Link>
+                <Link className="navbar-item nav-link" to="/login" onClick={this.handleLogout} >LOGOUT</Link>
               </>
               :
               <>
-                <Link className="navbar-item"   to="/login"><h1>LOGIN</h1>
+                <Link className="navbar-item"   to="/login">LOGIN
                 </  Link>
-                <Link className="navbar-item"   to="/register"><h1>REGISTER</ h1>
+                <Link className="navbar-item"   to="/register">REGISTER
                 </Link>
               </>
             }

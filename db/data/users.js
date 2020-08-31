@@ -5,7 +5,7 @@ module.exports = [
     password: 'pass',
     passwordConfirmation: 'pass',
     profilePicture: 'https://www.fillmurray.com/150/200',
-    about: 'Bacon ipsum dolor amet t-bone meatball ham drumstick jerky boudin.'
+    about: 'Avid traveller, ticking off europe one wishlist at a time!'
   },
   {
     username: 'siu kei',

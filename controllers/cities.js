@@ -9,7 +9,6 @@ async function citiesIndex(req, res, next) {
   } catch (err) {
     next(err) 
   }
-
 }
 
 async function citiesShow(req, res, next) {
@@ -62,7 +61,6 @@ async function citiesCommentCreate(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentBody = req.body
-    console.log('Comment Body:', commentBody)
     commentBody.user = req.currentUser._id
     city.comments.push(commentBody)
     await city.save()
@@ -77,7 +75,6 @@ async function citiesCommentDelete(req, res, next) {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
     const commentToDelete = city.comments.id(req.params.commentId)
-    console.log('commentToDelete:', commentToDelete)
     if (!commentToDelete) throw new Error(notFound)
     if (!commentToDelete.user.equals(req.currentUser._id)) throw new Error(unauthorized)
     await commentToDelete.remove()
@@ -87,8 +84,6 @@ async function citiesCommentDelete(req, res, next) {
     next(err)
   }
 }
-
-
 
 async function wishListToggle(req, res, next) {
   try {
@@ -101,30 +96,23 @@ async function wishListToggle(req, res, next) {
     }
     await city.save()
     res.status(200).json(city)
-  } catch  (err) {
+  } catch (err) {
     next(err)
   }
 }
-
-//favourite city
 
 async function favouriteToggle(req, res, next) {
   try {
     const city = await City.findById(req.params.id)
     if (!city) throw new Error(notFound)
-    console.log(req.currentUser._id)
     if (!city.favoritedUsers.includes(req.currentUser._id)) {
-      console.log('current user not in array')
       city.favoritedUsers.push(req.currentUser._id)
     } else {
-      console.log('current user is already in array')
-      console.log('Before:', city.favoritedUsers)
       city.favoritedUsers = city.favoritedUsers.filter(id => !id.equals(req.currentUser._id))
-      console.log('After:', city.favoritedUsers)
     }
     await city.save()
     res.status(200).json(city)
-  } catch  (err) {
+  } catch (err) {
     next(err)
   }
 }

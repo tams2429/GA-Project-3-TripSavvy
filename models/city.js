@@ -18,8 +18,8 @@ const citiesSchema = new mongoose.Schema({
 
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   comments: [commentSchema],
-  wishlistedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }], // <--
-  favoritedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }] // <-- now arrays of references to users
+  wishlistedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }],
+  favoritedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User', required: true }] 
 } , {
   timestamps: true
 })

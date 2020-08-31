@@ -22,7 +22,6 @@ const ErrorPage = () => (
       </div>
     </section>
   </>
-
 )
 
 export default ErrorPage

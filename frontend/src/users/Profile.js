@@ -84,7 +84,7 @@ class Profile extends React.Component {
                     latitude={city.cityLatLng[0]}
                     longitude={city.cityLatLng[1]}               
                   >
-                    <div className="city-pin"><span role="img" aria-label="pin">📍</span></div>
+                    <div className="city-pin"><span role="img" aria-label="heart">💖</span></div>
                   </Marker>
                 )}
                 {this.state.user.wishlistedCities.map((city) =>

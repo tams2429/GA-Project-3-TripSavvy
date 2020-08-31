@@ -81,7 +81,6 @@ class CreateCity extends React.Component {
       </section>
     )
   }
-
 }
 
 export default CreateCity

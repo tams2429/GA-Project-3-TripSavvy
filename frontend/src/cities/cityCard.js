@@ -30,10 +30,6 @@ class CityCard extends React.Component {
       this.setState( { weather: weather.data } )
       const cityLatLng = city.data.cityLatLng
       const info = await getInfo(cityLatLng[0], cityLatLng[1])
-      console.log('Currency:', info.data.results[0].annotations.currency.symbol)
-      console.log('Flag:', info.data.results[0].annotations.flag)
-      console.log('Drive on:', info.data.results[0].annotations.roadinfo.drive_on)
-      console.log('Speed in:', info.data.results[0].annotations.roadinfo.speed_in)
       this.setState( { info: info.data } )
     } catch (err) {
       console.log(err)
@@ -174,10 +170,17 @@ class CityCard extends React.Component {
                 <p className="title">Map</p>
                 {!this.state.weather ? <></> :
                   <div className="WeatherInfo">
+                    <p className="title">{this.state.weather.weather[0].main},</p>
                     <p className="title">{Math.floor(this.state.weather.main.temp)}°C</p>
-                    <figure className="image weather">
-                      <img className="weather-img" src={`http://openweathermap.org/img/wn/${this.state.weather.weather[0].icon}@2x.png`} alt="Weather icon"></img>
-                    </figure>
+                    {this.state.weather.weather[0].icon === '01n' || this.state.weather.weather[0].icon === '01d' ? 
+                      <figure className="image weatherSunny">
+                        <img className="weather-img" src={'http://openweathermap.org/img/wn/01d@2x.png'} alt="Weather icon"></img>
+                      </figure>
+                      : 
+                      <figure className="image weather">
+                        <img className="weather-img" src={`http://openweathermap.org/img/wn/${this.state.weather.weather[0].icon}@2x.png`} alt="Weather icon"></img>
+                      </figure>
+                    }
                   </div>
                 }
               </div>

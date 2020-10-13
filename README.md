@@ -57,7 +57,7 @@ This application uses external APIs, in order to enjoy the full experience of th
 
 ## Planning
 
-- RESTful Routes for Back-end (+images of using Insomnia),
+- RESTful Routes for Back-end,
 
     ![Insomnia Screenshot](/ReadmeResources/Insomnia.png)
 

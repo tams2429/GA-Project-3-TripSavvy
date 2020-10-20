@@ -153,17 +153,17 @@ async function favouriteToggle(req, res, next) {
 
 ### Bugs
 
-- The **'Latitude'** and **'Longitude'** inputs for editing/creating a City can take **non-numerical/invalid values** which results in an **error on the map** within the City 'Show' page,
-    - Can do **conditional rendering** to **only show the map**, when the **'Latitude' and 'Longitude' values** are **valid**,
-    - Use an external API to **search** and **autofill** the **'Latitude' and 'Longitude' values** when a City name has been entered,
-    - Error validation to **stop invalid values** from being **inputted**,
+- The **'Latitude'** and **'Longitude'** inputs for editing/creating a City can take **non-numerical/invalid values** which results in an **error on the map** within the City 'Show' page
+    - Can do **conditional rendering** to **only show the map**, when the **'Latitude' and 'Longitude' values** are **valid**
+    - Use an external API to **search** and **autofill** the **'Latitude' and 'Longitude' values** when a City name has been entered
+    - Error validation to **stop invalid values** from being **inputted**
 
 ### Planned features/extensions
 
-- **Chat function** between Users,
-- Extended to **cities outside of Europe**,
-- Link to **external APIs** where we can request and present **'Latest flight prices', 'Hotel prices**',
-- Adding a **'Cost' bar filter** on the home page, which users can slide/adjust and use as an additional filter,
+- **Chat function** between Users
+- Extended to **cities outside of Europe**
+- Link to **external APIs** where we can request and present **'Latest flight prices', 'Hotel prices**'
+- Adding a **'Cost' bar filter** on the home page, which users can slide/adjust and use as an additional filter
 
 ## Credits 🙇‍♂️ 🙇‍♀️
 

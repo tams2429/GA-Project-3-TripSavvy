@@ -8,26 +8,26 @@ const userData = require('./data/users')
 
 mongoose.connect(
   dbURI,
-  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, dbName: "test" },
   async (err, db) => {
-    if (err) { 
+    if (err) {
       console.log(err)
       return
     }
 
     try {
 
-      await db.dropDatabase() 
+      await db.dropDatabase()
 
       console.log('Database Dropped 👍')
 
-      const users = await User.create(userData) 
+      const users = await User.create(userData)
 
       console.log(`${'🙂'.repeat(users.length)} created`)
 
       let counter = 0
 
-      const citiesWithUsers = cityData.map(city => { 
+      const citiesWithUsers = cityData.map(city => {
         city.user = users[0]._id
 
         if (counter < cityData.length / 2) {
@@ -37,15 +37,15 @@ mongoose.connect(
           city.favoritedUsers = users[0]._id
           counter += 6
         }
-        
+
         return city
       })
 
-      const cities = await City.create(citiesWithUsers) 
+      const cities = await City.create(citiesWithUsers)
 
       console.log(`${'🌇 '.repeat(cities.length)} Cities created `)
 
-      await mongoose.connection.close() 
+      await mongoose.connection.close()
 
       console.log('Goodbye 👋')
 
@@ -53,7 +53,7 @@ mongoose.connect(
 
       await mongoose.connection.close()
 
-      console.log(err) 
+      console.log(err)
     }
   })
 
